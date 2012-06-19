@@ -1,11 +1,11 @@
-title : Blog Title
-tagline: Blog Tagline
+title : ClintGibler.com
+tagline: Security, Improv
 author :
-  name : Firstname Lastname
-  email : blah@email.test
-  github : username
-  twitter : username
-  feedburner : feedname
+  name: Clint Gibler
+  email : "clint gibler a.t. gmail DOT com"
+  github : T3mpest
+#  twitter : username
+#  feedburner : feedname
 
 navigation :
   - archive.html
@@ -13,4 +13,4 @@ navigation :
   - categories.html
   - pages.html
   - about.md
-  
+
