@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Clint Gibler</title>
+    <title>Rogue: A Scala Type-Safe MongoDB DSL</title>
     <meta name="author" content="Clint Gibler">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -11,9 +11,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/twitter/stylesheets/bootstrap.min.css?0.8672552875756525" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/twitter/stylesheets/style.css?0.008847742461256747" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.6702157630793723" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css?0.46228482264984583" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css?0.7548180034554718" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.8246236947277286" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,102 +48,12 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>Clint Gibler </h1>
+  <h1>Rogue: A Scala Type-Safe MongoDB DSL </h1>
 </div>
 
 <div class="row">
-  <div class="span12">
-    <!--<h2>About Me</h2>-->
-<p>
-  I am currently a third year Computer Science Ph.D. candidate at UC Davis, researching mobile security.
-  My work has primarily focused on examining how Android applications treat private user data and detecting code reuse.
-  I am fortunate to be advised by <a href="http://www.cs.ucdavis.edu/~hchen/">Hao Chen</a>.
-</p>
-
-<p>
-You can contact me at clint gibler a.t. gmail DOT com.
-</p>
-
-<p>
-Resume available upon request.
-</p>
-
-<h2>Publications</h2>
-
-<b>Attack of the Clones: Detecting Cloned Applications on Android Markets</b>
-</br>
-Jon Crussell, Clint Gibler, and Hao Chen
-</br>
-European Symposium on Research in Computer Security (ESORICS) <a href-"http://www.springerlink.com/content/978-3-642-33166-4/#section=1114172&page=1">2012</a>
-</br>
-</br>
-
-<b>AndroidLeaks: Automatically Detecting Potential Privacy Leaks in Android Applications on a Large Scale</b>
-</br>
-Clint Gibler, Jon Crussell, Jeremy Erickson, and Hao Chen
-</br>
-International Conference on Trust and Trustworthy Computing (TRUST) <a href="http://trust.sba-research.org/Agenda-Program.html">2012</a>
-</br>
-</br>
-
-<b>Investigating User Privacy in Android Ad Libraries</b>
-</br>
-Ryan Stevens, Clint Gibler, Jon Crussell, Jeremy Erickson, and Hao Chen
-</br>
-Workshop on Mobile Security Technologies (MoST) <a href="http://mostconf.org/2012/">2012</a>, in conjuction with IEEE S&amp;P
-</br>
-</br>
-
-
-<h2>Latest Posts</h2>
-
-<div class="post">
-  <h3 class="title"><a href="/programming/setting-up-mongodb-on-ubuntu-11-10">Setting Up MongoDB on Ubuntu 11.10</a> <span class="date">2012-06-28</span></h3>
-
-  <p>MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.</p>
-
-<h2 id="toc_0">Install</h2>
-
-<ul>
-<li><a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/">Install the MongoDB package.</a></li>
-</ul>
-
-<h2 id="toc_1">Configuration</h2>
-
-<p>I&#39;ve installed my OS and /home on different partitions to make reinstalling the OS easier. So let&#39;s keep the config file and data/logs on the /home partition.</p>
-
-<pre><code># in ~ or wherever you want to put mongodb&#39;s files
-mkdir mongodb
-cd mongodb
-mkdir db log                  # Create data/log folders
-# Create a copy of conf file
-cp /etc/init/mongodb.conf .
-</code></pre>
-
-<p>We want to store the data and log dirs in a custom location so they aren&#39;t wiped in OS reinstall, so change mongodb.conf to the following:</p>
-
-<pre><code>dbpath=/home/&lt;user&gt;/mongodb/db
-...
-logpath=/home/&lt;user&gt;/mongodb/log/mongodb.log
-...
-auth = true
-</code></pre>
-
-<h2 id="toc_2">Security</h2>
-
-<p>I&#39;m going to skip a lot of important details, please read:
-<a href="http://www.mongodb.org/display/DOCS/Security+and+Authentication">MongoDB&#39;s Security and Authentication</a>.
-The page lists default ports for services, basic firewall rules and other useful info.</p>
-
-
-  <div class="more">
-    <a href="/programming/setting-up-mongodb-on-ubuntu-11-10" class="btn">read more..</a>
-  </div>
-</div>
-<div class="post">
-  <h3 class="title"><a href="/programming/rogue-a-scala-type-safe-mongodb-dsl">Rogue: A Scala Type-Safe MongoDB DSL</a> <span class="date">2012-06-22</span></h3>
-
-  <p>Recently our group has been debating about switching to <a href="http://www.mongodb.org/">MongoDB</a>.
+  <div class="span8">
+    <p>Recently our group has been debating about switching to <a href="http://www.mongodb.org/">MongoDB</a>.
 As a number of our analysis tools are written in Scala, naturally we&#39;d like a Scala or Java ORM.</p>
 
 <p>After some search, we&#39;ve decided to explore Rogue, a type-safe DSL for querying MongoDB.
@@ -181,12 +91,68 @@ Well, we thought we could use the Scala type system to prevent this from ever ha
 <li><a href="http://www.assembla.com/spaces/liftweb/wiki/lift-mongodb-record">Lift-MongoDb-Record docs</a> -</li>
 </ul>
 
+<h2 id="toc_1">Troubleshooting</h2>
 
-  <div class="more">
-    <a href="/programming/rogue-a-scala-type-safe-mongodb-dsl" class="btn">read more..</a>
+<p>Rogue&#39;s GitHub page recommends including the following in your build.sbt to use Rogue:</p>
+
+<pre><code>val rogue = &quot;com.foursquare&quot; %% &quot;rogue&quot; % &quot;1.1.8&quot; intransitive()
+val liftMongoRecord = &quot;net.liftweb&quot; %% &quot;lift-mongodb-record&quot; % &quot;2.4-M2&quot;
+</code></pre>
+
+<p>However, lift-mongodb-record version 2.4-M2 could not be resolved for me using scala 2.9.1 and sbt 0.11.2.
+Using the &quot;-M4&quot; version enabled sbt to resolve it.</p>
+
+<pre><code>val liftMongoRecord = &quot;net.liftweb&quot; %% &quot;lift-mongodb-record&quot; % &quot;2.4-M4&quot;
+</code></pre>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+            <li class="prev disabled"><a>&larr; Previous</a></li>
+
+            <li><a href="/archive">Archive</a></li>
+
+            <li class="next"><a href="/programming/setting-up-mongodb-on-ubuntu-11-10" title="Setting Up MongoDB on Ubuntu 11.10">Next &rarr;</a></li>
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
   </div>
-</div>
-
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-22</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+      <li>
+        <a href="/categories#programming-ref">programming <span>2</span></a>
+      </li>    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+      <li>
+        <a href="/tags#scala-ref">scala <span>1</span></a>
+      </li>      <li>
+        <a href="/tags#programming-ref">programming <span>1</span></a>
+      </li>      <li>
+        <a href="/tags#mongodb-ref">mongodb <span>2</span></a>
+      </li>    </ul>
   </div>
 </div>
 

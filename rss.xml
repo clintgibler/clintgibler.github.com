@@ -3,6 +3,484 @@
   <channel>
     <title>ClintGibler.com</title>
     <link>http://www.clintgibler.com</link>
-    <pubDate>2012-06-20 09:20:41 -0700</pubDate>
+    <pubDate>2012-09-09 10:08:52 -0700</pubDate>
+    <item>
+      <title>Setting Up MongoDB on Ubuntu 11.10</title>
+      <link>http://www.clintgibler.com/programming/setting-up-mongodb-on-ubuntu-11-10</link>
+      <pubDate>2012-06-28</pubDate>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/title&gt;
+    &lt;meta name="author" content="Clint Gibler"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.9580550763683217" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/stylesheets/style.css?0.5696276757416316" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.48149138702951766" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand" href="/"&gt;ClintGibler.com&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;Setting Up MongoDB on Ubuntu 11.10 &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Install&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/"&gt;Install the MongoDB package.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="toc_1"&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;I&amp;#39;ve installed my OS and /home on different partitions to make reinstalling the OS easier. So let&amp;#39;s keep the config file and data/logs on the /home partition.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# in ~ or wherever you want to put mongodb&amp;#39;s files
+mkdir mongodb
+cd mongodb
+mkdir db log                  # Create data/log folders
+# Create a copy of conf file
+cp /etc/init/mongodb.conf .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We want to store the data and log dirs in a custom location so they aren&amp;#39;t wiped in OS reinstall, so change mongodb.conf to the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dbpath=/home/&amp;lt;user&amp;gt;/mongodb/db
+...
+logpath=/home/&amp;lt;user&amp;gt;/mongodb/log/mongodb.log
+...
+auth = true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_2"&gt;Security&lt;/h2&gt;
+
+&lt;p&gt;I&amp;#39;m going to skip a lot of important details, please read:
+&lt;a href="http://www.mongodb.org/display/DOCS/Security+and+Authentication"&gt;MongoDB&amp;#39;s Security and Authentication&lt;/a&gt;.
+The page lists default ports for services, basic firewall rules and other useful info.&lt;/p&gt;
+
+&lt;h4 id="toc_3"&gt;Things to note&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;By default MongoDB assumes you have carefully set up your firewall/networking environment to restrict who can access the server(s).
+
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;By default, security mode is off.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;By default, a mongod server will listen on all available IP addresses on a machine. You can restrict this to a single IP address with the
+&amp;#39;bind_ip&amp;#39; configuration option for mongod.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Are passwords sent over the wire encrypted?
+
+&lt;ul&gt;
+&lt;li&gt;Yes. (Actually a nonce-based digest is passed.)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Are database operations, after authenticating, passed over the wire encrypted?
+
+&lt;ul&gt;
+&lt;li&gt;Not by default. See the &lt;a href="http://docs.mongodb.org/manual/administration/ssl/"&gt;SSL doc page&lt;/a&gt; for more information.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We enabled secure mode by setting &lt;em&gt;auth = true&lt;/em&gt; in mongodb.conf above.&lt;/p&gt;
+
+&lt;h3 id="toc_4"&gt;Create Users&lt;/h3&gt;
+
+&lt;p&gt;Create admin user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; // use admin db
+$ mongo localhost/admin
+&amp;gt; db.addUser(&amp;quot;theadmin&amp;quot;, &amp;quot;anadminpassword&amp;quot;)
+&amp;gt; // authenticate as admin
+&amp;gt; db.auth(&amp;quot;theadmin&amp;quot;, &amp;quot;anadminpassword&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create read/write user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; use somedb
+&amp;gt; db.addUser(&amp;quot;joe&amp;quot;, &amp;quot;passwordForJoe&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create read user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; use somedb
+&amp;gt; db.addUser(&amp;quot;guest&amp;quot;, &amp;quot;passwordForGuest&amp;quot;, true)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="toc_5"&gt;Secure Mode with Sharded Clusters and Replica Sets&lt;/h3&gt;
+
+&lt;p&gt;From a client&amp;#39;s perspective, communicating with a sharded cluster or replica set is identical to single-server authentication.
+However, servers use a &lt;em&gt;key file&lt;/em&gt; to authenticate internal communication.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A key file must contain at least six Base64 characters and be no larger than 1KB (whitespace included). Whitespace characters are stripped.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Since the key file is stored in a file and not typed, I see no reason not to make it close to 1KB. A simple generation using &lt;em&gt;mkpasswd&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in `seq 0 N`; do mkpasswd -S &amp;lt;salt&amp;gt; -s $i &amp;gt;&amp;gt; key; done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where salt is 2 characters and N is the number of passwords to generate. I found N = ~70 to create key files close to 1KB.
+To include even more characters you can remove newlines as MongoDB will strip them anyway.&lt;/p&gt;
+
+&lt;p&gt;Make sure to set permissions restrictively on &lt;em&gt;key&lt;/em&gt;, as MongoDB will exit immediately if the permissions are too open (on *nix up to 700 is allowed).
+Also note that MongoDb will complain if there&amp;#39;s any &amp;quot;.&amp;quot; in the key file, so replace them with some other characters.&lt;/p&gt;
+
+&lt;h2 id="toc_6"&gt;Running&lt;/h2&gt;
+
+&lt;p&gt;Since we&amp;#39;re placing the db data and &lt;em&gt;mongodb.conf&lt;/em&gt; in custom locations we need to slightly customize how we run mongodb.&lt;/p&gt;
+
+&lt;h3 id="toc_7"&gt;Shell script&lt;/h3&gt;
+
+&lt;p&gt;You can use a simple shell script, like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+mongod --config /path/to/mongodb.conf --keyFile /path/to/key
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="toc_8"&gt;As a service&lt;/h3&gt;
+
+&lt;p&gt;This is the &lt;a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/"&gt;recommended method&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo service mongodb start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/mongodb start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Making these methods work using our customized install settings requires a few changes.&lt;/p&gt;
+
+&lt;p&gt;To modify the default service behavior edit &lt;em&gt;/etc/init/mongodb.conf&lt;/em&gt; (spacing changed to improve readability):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Original:
+if [ &amp;quot;x$ENABLE_MONGODB&amp;quot; = &amp;quot;xyes&amp;quot; ]; then exec start-stop-daemon --start --quiet
+       --chuid mongodb
+       --exec  /usr/bin/mongod --
+       --config /etc/mongodb.conf; fi
+# I modified to:
+if # same as before up to
+       --chuid &amp;lt;custom_user&amp;gt;
+       --exec  /usr/bin/mongod --
+       --config /home/&amp;lt;user&amp;gt;/mongodb/mongodb.conf
+       --keyFile /home/&amp;lt;user&amp;gt;/mongodb/key; fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Running as the default mongodb user is probably a good idea unless you have a specific reason not to.
+Now using &lt;em&gt;service&lt;/em&gt; to start/stop mongodb will use our custom settings.&lt;/p&gt;
+
+    &lt;hr&gt;
+    &lt;div class="pagination"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/programming/rogue-a-scala-type-safe-mongodb-dsl" title="Rogue: A Scala Type-Safe MongoDB DSL"&gt;&amp;larr; Previous&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li class="next disabled"&gt;&lt;a&gt;Next &amp;rarr;&lt;/a&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;blog comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;
+
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-06-28&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+      &lt;li&gt;
+        &lt;a href="/categories#programming-ref"&gt;programming &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;    &lt;/ul&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Tags&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+      &lt;li&gt;
+        &lt;a href="/tags#mongodb-ref"&gt;mongodb &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;      &lt;li&gt;
+        &lt;a href="/tags#linux-ref"&gt;linux &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+
+      &lt;footer&gt;
+        &lt;p&gt;&amp;copy; Clint Gibler 2012 
+          with help from &lt;a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework"&gt;ruhoh&lt;/a&gt;
+          and &lt;a href="http://twitter.github.com/bootstrap/" target="_blank"&gt;Twitter Bootstrap&lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/footer&gt;
+
+    &lt;/div&gt; &lt;!-- /container --&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script&gt;
+  var _gaq=[['_setAccount','UA-123-12'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</description>
+    </item>
+    <item>
+      <title>Rogue: A Scala Type-Safe MongoDB DSL</title>
+      <link>http://www.clintgibler.com/programming/rogue-a-scala-type-safe-mongodb-dsl</link>
+      <pubDate>2012-06-22</pubDate>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/title&gt;
+    &lt;meta name="author" content="Clint Gibler"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.3842399921842585" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/stylesheets/style.css?0.7005152554498814" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.3839788938284293" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand" href="/"&gt;ClintGibler.com&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;Rogue: A Scala Type-Safe MongoDB DSL &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;Recently our group has been debating about switching to &lt;a href="http://www.mongodb.org/"&gt;MongoDB&lt;/a&gt;.
+As a number of our analysis tools are written in Scala, naturally we&amp;#39;d like a Scala or Java ORM.&lt;/p&gt;
+
+&lt;p&gt;After some search, we&amp;#39;ve decided to explore Rogue, a type-safe DSL for querying MongoDB.
+Here&amp;#39;s some motivation from the Foursquare engineers for developing Rogue, after using Lift for their ORM:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Essentially, we found the querying support a bit too expressive &#x2014; you can pass in a query object that doesn&#x2019;t represent a valid
+query, or query against fields that aren&#x2019;t part of the record. And in addition it isn&#x2019;t very type-safe.
+You can ask for, say, all Venue records where mayor = &#x201C;Bob&#x201D;, and it happily executes that query for you, returning nothing,
+never informing you that the mayor field is not a String but a Long representing the ID of the user.
+Well, we thought we could use the Scala type system to prevent this from ever happening, and that&#x2019;s what we set out to do.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The idea of compile-time query sanity checks is pretty neat. Unfortunately Rogue documentation is fairly sparse, though people are quite
+  helpful on the mailing list and there is some example code I&amp;#39;ve linked to below.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Initial Foursquare blog posts about Rogue
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://engineering.foursquare.com/2011/01/21/rogue-a-type-safe-scala-dsl-for-querying-mongodb/"&gt;Rogue: A Type-Safe Scala DSL for querying MongoDB&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://engineering.foursquare.com/2011/01/31/going-rogue-part-2-phantom-types/"&gt;Going Rogue, Part 2: Phantom Types&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue"&gt;Rogue GitHub Page&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue/blob/master/src/test/scala/com/foursquare/rogue/TestModels.scala"&gt;Models examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue/blob/master/src/test/scala/com/foursquare/rogue/QueryTest.scala"&gt;Query examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue/blob/master/docs/Indexing.md"&gt;Indexing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.assembla.com/spaces/liftweb/wiki/lift-mongodb-record"&gt;Lift-MongoDb-Record docs&lt;/a&gt; -&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="toc_1"&gt;Troubleshooting&lt;/h2&gt;
+
+&lt;p&gt;Rogue&amp;#39;s GitHub page recommends including the following in your build.sbt to use Rogue:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;val rogue = &amp;quot;com.foursquare&amp;quot; %% &amp;quot;rogue&amp;quot; % &amp;quot;1.1.8&amp;quot; intransitive()
+val liftMongoRecord = &amp;quot;net.liftweb&amp;quot; %% &amp;quot;lift-mongodb-record&amp;quot; % &amp;quot;2.4-M2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, lift-mongodb-record version 2.4-M2 could not be resolved for me using scala 2.9.1 and sbt 0.11.2.
+Using the &amp;quot;-M4&amp;quot; version enabled sbt to resolve it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;val liftMongoRecord = &amp;quot;net.liftweb&amp;quot; %% &amp;quot;lift-mongodb-record&amp;quot; % &amp;quot;2.4-M4&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;hr&gt;
+    &lt;div class="pagination"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev disabled"&gt;&lt;a&gt;&amp;larr; Previous&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li class="next"&gt;&lt;a href="/programming/setting-up-mongodb-on-ubuntu-11-10" title="Setting Up MongoDB on Ubuntu 11.10"&gt;Next &amp;rarr;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;a href="http://disqus.com" class="dsq-brlink"&gt;blog comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;
+
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-06-22&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+      &lt;li&gt;
+        &lt;a href="/categories#programming-ref"&gt;programming &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;    &lt;/ul&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Tags&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+      &lt;li&gt;
+        &lt;a href="/tags#scala-ref"&gt;scala &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;      &lt;li&gt;
+        &lt;a href="/tags#programming-ref"&gt;programming &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;      &lt;li&gt;
+        &lt;a href="/tags#mongodb-ref"&gt;mongodb &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+      &lt;/li&gt;    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+
+      &lt;footer&gt;
+        &lt;p&gt;&amp;copy; Clint Gibler 2012 
+          with help from &lt;a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework"&gt;ruhoh&lt;/a&gt;
+          and &lt;a href="http://twitter.github.com/bootstrap/" target="_blank"&gt;Twitter Bootstrap&lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/footer&gt;
+
+    &lt;/div&gt; &lt;!-- /container --&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script&gt;
+  var _gaq=[['_setAccount','UA-123-12'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</description>
+    </item>
   </channel>
 </rss>
