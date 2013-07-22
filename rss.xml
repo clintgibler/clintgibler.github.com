@@ -3,7 +3,7 @@
   <channel>
     <title>ClintGibler.com</title>
     <link>http://www.clintgibler.com</link>
-    <pubDate>2013-04-17 10:43:44 -0700</pubDate>
+    <pubDate>2013-07-21 17:23:16 -0700</pubDate>
     <item>
       <title>Setting Up MongoDB on Ubuntu 11.10</title>
       <link>http://www.clintgibler.com/programming/setting-up-mongodb-on-ubuntu-11-10</link>
@@ -21,9 +21,9 @@
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.5754780178159106" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/stylesheets/style.css?0.3081674080650574" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.7925713804774993" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.8170226238682936" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/stylesheets/style.css?0.17555640249439564" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.47508825005233724" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -308,9 +308,9 @@ Now using &lt;em&gt;service&lt;/em&gt; to start/stop mongodb will use our custom
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.11292193065301848" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/stylesheets/style.css?0.832791139805072" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.6252272323930016" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.7192820197238154" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/stylesheets/style.css?0.5161680674517176" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.6396599200233104" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
