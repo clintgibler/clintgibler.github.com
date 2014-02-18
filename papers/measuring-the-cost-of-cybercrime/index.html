@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Measuring the Cost of Cybercrime</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Clint Gibler">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/style-e81fa375b231bedf6cb2dbc6653570cc.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/google_prettify/sons-of-obsidian-afb0925bfa2d994f17dab93e13fbf999.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/">Clint Gibler</a>
+          <ul class="nav">
+              
+                <li><a href="/about">About</a></li>
+              
+              
+                <li><a href="/posts">Posts</a></li>
+              
+              
+                <li><a href="/papers">Papers</a></li>
+              
+              
+                <li><a href="/books">Books</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Measuring the Cost of Cybercrime </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2013-01-07</strong>
+    </div>
+    <div class="content">
+      <p><a href="http://weis2012.econinfosec.org/papers/Anderson_WEIS2012.pdf">Full paper</a> - <a href="http://scholar.google.com/scholar.bib?q=info:a716LVmi9LoJ:scholar.google.com/">bibtex</a></p>
+
+<h2 id="toc_0">tl;dr <small>(too long; didn&#39;t read)</small></h2>
+
+<p>The authors attempt to calculate the approximate cost to individuals and society of several types of cybercrime.</p>
+
+<p><strong>Direct losses</strong>: losses, damage, or other suffering felt by the victim as a consequence of a cybercrime.</p>
+
+<p><strong>Indirect losses</strong>: the losses and opportunity costs imposed on society by the fact that a certain cybercrime is carried
+out, no matter whether successful or not and independent of a specific instance of that cybercrime. Indirect costs
+generally cannot be attributed to individual victims.</p>
+
+<p><strong>Defence costs</strong>: prevention efforts, including direct defence costs, i.e., the cost of development, deployment, and maintenance of prevention measures, as well as indirect defence costs, such as inconvenience and opportunity costs caused by the prevention measures.</p>
+
+<p><strong>Cost to society</strong>: direct losses + indirect losses + defence costs</p>
+
+<p>Criminal revenue is in practice significantly lower than direct losses and much lower than direct plus indirect losses.</p>
+
+<ul>
+<li><strong>Traditional frauds</strong> such as tax and welfare fraud cost each of us a few hundred pounds/euros/dollars a year.
+The costs of defences, and of subsequent enforcement, are much less than the amounts stolen.</li>
+<li><strong>Transitional frauds</strong> such as payment card fraud cost citizens a few tens of pounds/euros/dollars a year.
+Online payment card fraud typically runs at 0.3% of the turnover of e-commerce firms.
+Defence costs are broadly comparable with actual losses, but the indirect costs of business foregone because of the
+fear of fraud, both by consumers and by merchants, are several times higher.</li>
+<li>The <strong>new cyber-frauds</strong> such as fake antivirus net their perpetrators relatively small sums, with common scams pulling in tens of cents/pence per year per head of population. In
+total, cyber-crooks&#39; earnings might amount to a couple of dollars per citizen per year. But the indirect costs and defence costs are very substantial -- at least ten times that.
+The clean-up costs faced by users (whether personal or corporate) are the largest single component;
+owners of infected PCs may have to spend hundreds of dollars, while the average cost to each of us as citizens runs
+in the low tens of dollars per year. The costs of antivirus (to both individuals and businesses) and the cost of patching
+(mostly to businesses) are also significant at a few dollars a year each.</li>
+</ul>
+
+<p><strong>Conclusion</strong>: We should spend less in anticipation of computer crime (on antivirus,
+firewalls etc.) and an awful lot more on catching and punishing the perpetrators.</p>
+
+<h2 id="toc_1">Abstract</h2>
+
+<p>In this paper we present what we believe to be the first systematic study of the costs of cybercrime. It was prepared in response to a request from the UK Ministry of Defence following scepticism that previous studies had hyped the problem. For each of the main categories of cybercrime we set out what is and is not known of the direct costs, indirect costs and defence costs -- both to the UK and to the world as a whole. We distinguish carefully between traditional crimes that are now `cyber&#39; because they are conducted online (such as tax and welfare fraud); transitional crimes whose modus operandi has changed substantially as a result of the move online (such as credit card fraud); new crimes that owe their existence to the Internet; and what we might call platform crimes such as the provision of botnets which facilitate other crimes rather than being used to extract money from victims directly. As far as direct costs are concerned, we find that traditional offences such as tax and welfare fraud cost the typical citizen in the low hundreds of pounds/Euros/dollars a year; transitional frauds cost a few pounds/Euros/dollars; while the new computer crimes cost in the tens of pence/cents. However, the indirect costs and defence costs are much higher for transitional and new crimes. For the former they may be roughly comparable to what the criminals earn, while for the latter they may be an order of magnitude more. As a striking example, the botnet behind a third of the spam sent in 2010 earned its owners around US$2.7m, while worldwide expenditures on spam prevention probably exceeded a billion dollars. We are extremely inefficient at fighting cybercrime; or to put it another way, cyber-crooks are like terrorists or metal thieves in that their activities impose disproportionate costs on society. Some of the reasons for this are well-known: cybercrimes are global and have strong externalities, while traditional crimes such as burglary and car theft are local, and the associated equilibria have emerged after many years of optimisation. As for the more direct question of what should be done, our figures suggest that we should spend less in anticipation of cybercrime (on antivirus, firewalls, etc.) and more in response -- that is, on the prosaic business of hunting down cyber-criminals and throwing them in jail.</p>
+
+<h2 id="toc_2">Review</h2>
+
+<h3 id="toc_3">Pros</h3>
+
+<p>I thought the paper presented an interesting and thoughtful way to break down the types of cybercrime costs (direct, indirect, etc).</p>
+
+<p>The authors also did a great job surveying and aggregating different types of cyber crimes and their associated costs.</p>
+
+<h3 id="toc_4">Cons</h3>
+
+<p>Many of the costs are heavily estimations and may easily be off up to an order of magnitude, which the authors readily admit.
+This is understandable, as it&#39;s difficult to get precise numbers.</p>
+
+<p>There was limited novelty of technique / methodology, they primarily reference and aggregate existing work.
+To be fair, the latter is the intention of the paper.</p>
+
+<h2 id="toc_5">Notes</h2>
+
+<p>Choose to estimate global figures, as sometimes there is only global or only UK data. They scale UK-only data based on that
+it&#39;s roughly 5% of world GDP.</p>
+
+<p><strong>Criminal revenue</strong>: the monetary equivalent of the gross receipts from a crime, excluding any `lawful&#39; business
+expenses of the criminal. (e.g. paying for hosting services)</p>
+
+<h3 id="toc_6">Examples of Losses</h3>
+
+<p><strong>Direct losses</strong>:</p>
+
+<ul>
+<li>money withdrawn from victim accounts</li>
+<li>time and effort to reset account credentials (for both banks and consumers)</li>
+<li>distress suffered by victims</li>
+<li>secondary costs of overdrawn accounts: deferred purchases, inconvenience of not having access to money when needed</li>
+<li>lost attention and bandwidth caused by spam messages, even if they are not reacted to</li>
+</ul>
+
+<p><strong>Indirect losses</strong>:</p>
+
+<ul>
+<li>loss of trust in online banking, leading to reduced revenues from electronic transaction
+fees, and higher costs for maintaining branch staff and cheque clearing facilities</li>
+<li>missed business opportunity for banks to communicate with their customers by email</li>
+<li>reduced uptake by citizens of electronic services as a result of lessened trust in online transactions</li>
+<li>efforts to clean-up PCs infected with the malware for a spam sending botnet</li>
+</ul>
+
+<p><strong>Defence costs</strong>:</p>
+
+<ul>
+<li>security products such as spam filters, antivirus, and browser extensions to protect users</li>
+<li>security services provided to individuals, such as training and awareness measures</li>
+<li>security services provided to industry, such as website ‘take-down’ services</li>
+<li>fraud detection, tracking, and recuperation efforts</li>
+<li>law enforcement</li>
+<li>the inconvenience of missing an important message falsely classified as spam</li>
+</ul>
+
+<p>Defence costs, like indirect losses, are largely independent of individual victims. Often it is even difficult to allocate them to individual types of cybercrime. Defences can target the actual crimes or their supporting infrastructure, and the costs can be incurred in anticipation of or reaction to crimes, the latter being to deter copycats.</p>
+
+<p>It is possible to spend too much on defense -- 9/11 terrorist attacks costed $500,000 to carry out and by 2008 U.S. had spent
+over $3 trillion on defense costs and wars in Afghanistan and Iraq.</p>
+
+<p>The misallocation of resources associated with cybercrime results mostly from economic and political factors rather
+than from behavioural ones. Globalisation means that for much online crime, the perpetrators and victims are in different jurisdictions.
+This reduces both the motivation and the opportunity for police action.</p>
+
+<h3 id="toc_7">Types of Fraud Considered</h3>
+
+<ul>
+<li><strong>Online payment card fraud</strong> - may get charged back to the merchant, the bank, or bounched back to the owner.</li>
+<li><strong>Online banking fraud</strong> - user banking credentials obtained via phishing or keyloggers</li>
+<li><strong>In-person payment card fraud</strong> - commonly attackers use tampered PED terminals or ATM skimmers to capture card data and
+make forged cards that operate in fall-back mag-stripe mode.</li>
+<li><strong>Fake antivirus</strong> - a pop-up on a website warns the user that their computer is infected with malware, the link cause fake antivirus to be downloaded and run.</li>
+<li><strong>Infringing pharmaceuticals</strong> - direct costs: risk of fraud or health risks. indirect: spam compaigns.</li>
+<li><strong>Copyright-infringing software</strong> - societal costs: lost licensing revenues to copyright and brand holders. 20% of one survey
+responded that they had purchased software advertised in spam email.</li>
+<li><strong>Copyright-infringing music and video</strong> - &quot;Job losses among music company middle managers are just the creative destruction inherent in technological progress.&quot;</li>
+<li><strong>&#39;Stranded traveller&#39; scams</strong> - compromised email account emails friends, &quot;I&#39;m stuck in [place] and was mugged, need money to leave.&quot;</li>
+<li><strong>&#39;Fake escrow&#39; scams</strong> - victim believes they won an online auction for a car/motorbike. Seller proposes using a third-party escrow for the transaction, car is never delivered.</li>
+<li><strong>Advanced fee fraud</strong> - aka as the Nigerian prince. Pay a little money up front to get a huge payback.</li>
+<li><strong>PABX fraud</strong> - fraud losses from telephony, fixed and mobile. PABX: criminals reconfigure company&#39;s telephone system
+to accept incoming calls and relay them onward. They then sell phone cards that use it.</li>
+<li><strong>Industrial cyber-espionage and extortion</strong> - there is no reliable evidence of the extent or cost of industrial cyber-espionage
+and extortion, we do not include any figures for these crimes in our estimates.</li>
+<li><strong>Fiscal fraud</strong> - tax and welfare fraud committed against the government. Criminals in the USA have been impersonating citizens
+by electronically filing fraudulent tax returns using stolen lists of names and Social Security numbers.</li>
+<li><strong>Other commercial fraud</strong> - insider trading, embezzlement, control fraud (executives loot their company). Not considered in
+this paper because they involve the exercise of power in interpersonal and institutional relationships rather than
+claims made through an automated system.</li>
+</ul>
+
+<h3 id="toc_8">The Infrastructure Supporting Cybercrime</h3>
+
+<p>While these activities are often referred to directly as cybercrime, they enable many different crimes.
+They estimate the infrastructure&#39;s cost separately to avoid double counting.</p>
+
+<p><strong>Botnets</strong> - Herley and Florencio estimated an upper bound to botnet herders&#39; income of 50c per machien per annum.</p>
+
+<p>It is very difficult to estimate the size of botnets. Previous approaches have relied on counting number of unique IPs
+    associated with botnet activity. However, dynamic IP address allocation can cause the same machine to show up as many
+    IP addresses, causing the number of believed bots to be off by an order of magnitude.</p>
+
+<ul>
+<li><strong>Botnet mitigation by consumers</strong> - manual updates, behind the scenes updates by software vendors.</li>
+<li><strong>Botnet mitigation by industry</strong> - ISPs and hosting providers who act against infected machines on their networks, antivirus companies.</li>
+<li><strong>Other botnet mitigation costs</strong> - malware may drive users to a given more locked down platform, antivirus adoption, software vendors patching products, law enforcement.</li>
+</ul>
+
+<p><strong>Pay-per-install</strong> - malware authors pay a PPI operator to install their malware on X PCs in a geographic area for a fee.</p>
+
+<h3 id="toc_9">Final Thoughts</h3>
+
+<p>Traditional acquisitive crimes, such as burglary and car theft, tend to have two properties. The first is that the impact
+on the victim is greater in financial terms than either the costs borne in anticipation of crime, or the response costs
+afterwards such as the police and the prisons.</p>
+
+<p>Drilling down further into the victim costs, we find that for nonviolent crimes the value of the property stolen or damaged is much greater than the cost of lost output, victim services or
+emotional impact.</p>
+
+<p>The criminal justice system recognises the quite disproportionate social costs of robbery as opposed to burglary.
+While robbers get longer sentences than burglars do, cyber-crooks get shorter ones. This is probably because cyber-crimes,
+being impersonal, evoke less resentment and vindictiveness. Indeed, the crooks are simply being
+rational: while terrorists try to be annoying as possible, fraudsters are quite the opposite and
+try to minimise the probability that they will be the targets of effective enforcement action.</p>
+
+<p>Why does cyber-crime carry such high indirect and defence costs? Many of the reasons have
+been explored in the security-economics literature: there are externalities, asymmetric information,
+and agency effects galore. Globalisation undermines the incentives facing local police
+forces, while banks, merchants and service providers engage in liability shell games. We are also
+starting to understand the behavioural aspects: terrorist crimes are hyper-salient because the
+perpetrators go out of their way to be as annoying as possible, while most online crooks go out
+of their way to be invisible.</p>
+
+<h2 id="toc_10">Diagrams</h2>
+
+<p>The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+<br /></p>
+
+<p><img class="paper_diagram" src="/assets/media/papers/reviews/measuring_cybercrime_cost//cost_estimates.png"></p>
+
+<p><br />
+<br /></p>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      <li>
+        <a href="/categories#underground_economy-ref">underground_economy <span>1</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      <li>
+        <a href="/tags#underground_economy-ref">underground_economy <span>1</span></a>
+      </li>
+      <li>
+        <a href="/tags#security-ref">security <span>3</span></a>
+      </li>
+    </ul>
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev"><a href="/papers/mocfi-a-framework-to-mitigate-control-flow-attacks-on-smartphones" title="MoCFI: A Framework to Mitigate Control-Flow Attacks on Smartphones">&larr; Previous</a></li>
+
+          <li><a href="/archive">Archive</a></li>
+
+          <li class="next"><a href="/papers/identity-location-disease-and-more-inferring-your-secrets-from-android-public-resources" title="Identity, Location, Disease and More: Inferring Your Secrets from Android Public Resources">Next &rarr;</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'clintgibler'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Clint Gibler 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37489513-1']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+
+  </body>
+</html>

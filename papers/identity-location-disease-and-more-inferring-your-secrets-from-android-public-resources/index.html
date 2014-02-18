@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Identity, Location, Disease and More: Inferring Your Secrets from Android Public Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Clint Gibler">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/style-e81fa375b231bedf6cb2dbc6653570cc.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/google_prettify/sons-of-obsidian-afb0925bfa2d994f17dab93e13fbf999.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/">Clint Gibler</a>
+          <ul class="nav">
+              
+                <li><a href="/about">About</a></li>
+              
+              
+                <li><a href="/posts">Posts</a></li>
+              
+              
+                <li><a href="/papers">Papers</a></li>
+              
+              
+                <li><a href="/books">Books</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Identity, Location, Disease and More: Inferring Your Secrets from Android Public Resources </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2013-10-14</strong>
+    </div>
+    <div class="content">
+      <p><a href="http://www.cs.indiana.edu/%7Ezhou/files/fp045-zhou.pdf">Full paper</a> - <a href="">bibtex</a></p>
+
+<h2 id="toc_0">tl;dr <small>(too long; didn&#39;t read)</small></h2>
+
+<p>The authors develop a proof of concept Android app with no permissions that can &quot;acquire sensitive information such as a smartphone user&#39;s identity, the disease condition he/she is interested in, her location and her driving route.&quot;</p>
+
+<p>More specifically:</p>
+
+<ul>
+<li>What revealing apps has the user installed? (e.g. a diabetes or gay social network app)</li>
+<li>Where is the user?</li>
+<li>What is the phone owner&#39;s Twitter account?</li>
+<li>What diseases is he/she searching on the WebMD mobile app?</li>
+<li>Stocks he/she searches in Yahoo! Finance.</li>
+<li>What is the current travel route of the user?</li>
+</ul>
+
+<p>The app uses 4 primary public channels of info:</p>
+
+<ol>
+<li>Other apps installed on the phone</li>
+<li>ARP information</li>
+<li>Per-app data usage statistics</li>
+<li>Speaker status (on or off)</li>
+</ol>
+
+<h4 id="toc_1">Neat techniques</h4>
+
+<ul>
+<li>Capturing network requests and building a model of app network send/response sizes
+to automatically infer user behavior based on network packet size alone.</li>
+<li>Using MOCK_LOCATION to more quickly and easily automate driving through routes.</li>
+<li>Crawling driving directions from Google Maps and then running them through text-to-speech
+to know how long they would take to pronounce.</li>
+</ul>
+
+<h2 id="toc_2">Abstract</h2>
+
+<p>The design of Android is based on a set of unprotected shared resources, including those inherited from Linux (e.g., Linux public directories). However, the dramatic development in Android applications (<em>app</em> for short) makes available a large amount of public background information (e.g., social networks, public online services), which can potentially turn such originally harmless resource sharing into serious privacy breaches. In this paper, we report our work on this important yet understudied problem. We discovered three unexpected channels of information leaks on Android: per-app data-usage statistics, ARP information, and speaker status (on or off). By monitoring these channels, an app without <em>any</em> permission may acquire sensitive information such as smartphone user’s identity, the disease condition she is interested in, her geo-locations and her driving route, from top-of-the-line Android apps. Furthermore, we show that using existing and new techniques, this zero-permission app can both determine when its target (a particular application) is running and send out collected data stealthily to a remote adversary. These findings call into question the soundness of the design assumptions on shared resources, and demand effective solutions. To this end, we present a mitigation mechanism for achieving a delicate balance between utility and privacy of such resources.</p>
+
+<h2 id="toc_3">Review</h2>
+
+<h3 id="toc_4">Pros</h3>
+
+<p>I feel the main contribution of the paper is enumerating the public channels of info,
+especially the per-app data usage statistics and ARP info. Most people familiar with Android
+know that there&#39;s an API to see the installed packages and it&#39;s unsurprising that it&#39;s possible
+to check the speaker status.</p>
+
+<p>Determining the user&#39;s driving route based on a series of lengths of speech I thought was
+pretty impressive. The idea is easy to conceptualize but actually making it work in practice
+is quite a feat.</p>
+
+<p>Overall I thought this paper was an interesting examination of what an app with no permissions
+can tell about the user.</p>
+
+<h3 id="toc_5">Cons</h3>
+
+<p>Clearly a bit F.U.D-y. The abstract makes it sound like Android itself is leaking users&#39;
+medical conditions and identity which in reality Android just leaks app network usage data.
+The effect is similar but in my opinion the former is almost a bit intentionally sensationalist.</p>
+
+<p>The inferring app behavior based on network request size technique was used pretty much exactly
+from another paper, I believe from the same group. Once you know it&#39;s possible to get decently
+fine-grained per-app data usage statistics the Twitter/WebMD/Yahoo! Finance results they
+demonstrate are only a logical extension.</p>
+
+<p>I feel the route inference attack is not very scalable and relies on having a small number of
+Points of Interest that have many routes to them analyzed. This doesn&#39;t seem like a general
+technique for determining user travel to/from any arbitrary location. I would have liked a
+little discussion on the feasibility or time and effort required to extend this attack to
+determining user route to/from anywhere in a reasonably sized city.</p>
+
+<h2 id="toc_6">Notes</h2>
+
+<p>Most people who have done Android work know that 1) is easy to obtain with no permissions.
+However, this alone can reveal potentially quite sensitive info about the user.
+Two examples they give include: disease-specific healthcare apps (like a diabetes app) or
+specific life-style apps (e.g gay social network like Hornet).</p>
+
+<p>2) contains the BSSID of the WAP a phone is connected to, i.e. what WiFi network you&#39;re currently connected to.
+Geo-location databases can determine your location when provided the name of your WiFi network.
+I believe the READ_PHONE_STATE permission is required to see all nearby WiFi networks but with no
+permissions you can still see the current one.</p>
+
+<p>Based on your interaction with an app, different network requests are sent. When the size of
+network requests for different events are easily distinguishable you can actually tell what
+the user has done based on 3). The authors demonstrate that:</p>
+
+<ul>
+<li>Using some location filtering (helped by 2.) and a series of time stamps of Twitter posts
+(3.) you can fairly reliably identify the exact Twitter user of the phone you&#39;re on.
+This is important because many Twitter account contain the user&#39;s real name and
+potentially a link to their personal website. So in some cases an app with no permissions
+can identify the real person owning the phone.</li>
+<li>The authors profiled the WebMD mobile app and found retrieving information about each
+disease resulted in a unique response size. Thus using 3) the app can observe the
+diseases searched by the user.</li>
+<li>A similar attack is shown to be effective on the Yahoo! Finance app with stocks.</li>
+</ul>
+
+<p>Finally, the authors show how a user&#39;s driving route can be inferred using whether the speaker status is on or off (4). The key idea is that reading out specific street names and directions in Navigation takes a different amount of time based on the instructions. Given a sequence of the lengths of time Navigation is reading out directions one can infer the path / destination. The route needed to have at least 9 steps for high accuracy.</p>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      <li>
+        <a href="/categories#android-ref">android <span>2</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      <li>
+        <a href="/tags#android-ref">android <span>12</span></a>
+      </li>
+      <li>
+        <a href="/tags#privacy-ref">privacy <span>2</span></a>
+      </li>
+      <li>
+        <a href="/tags#security-ref">security <span>3</span></a>
+      </li>
+    </ul>
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev"><a href="/papers/measuring-the-cost-of-cybercrime" title="Measuring the Cost of Cybercrime">&larr; Previous</a></li>
+
+          <li><a href="/archive">Archive</a></li>
+
+          <li class="next disabled"><a>Next &rarr;</a>
+      </ul>
+    </div>
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'clintgibler'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Clint Gibler 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37489513-1']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+
+  </body>
+</html>

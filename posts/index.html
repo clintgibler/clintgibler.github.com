@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Categories</title>
+    <title>Posts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Clint Gibler">
 
@@ -34,8 +34,8 @@
               
                 <li><a href="/about">About</a></li>
               
+                <li class="active"><a href="/posts" class="active">Posts</a></li>
               
-                <li><a href="/posts">Posts</a></li>
               
               
                 <li><a href="/papers">Papers</a></li>
@@ -52,66 +52,70 @@
 
       <div class="content">
         <div class="page-header">
-  <h1>Categories </h1>
+  <h1>Posts </h1>
 </div>
 
 <div class="row-fluid">
   <div class="span12">
-    
-<ul class="tag_box inline">
-  <li>
-    <a href="/categories#programming-ref">programming <span>3</span></a>
-  </li>
-  <li>
-    <a href="/categories#advice-ref">advice <span>1</span></a>
-  </li>
-  <li>
-    <a href="/categories#conference-ref">conference <span>1</span></a>
-  </li>
-  <li>
-    <a href="/categories#screen-ref">screen <span>1</span></a>
-  </li>
-  <li>
-    <a href="/categories#talk-ref">talk <span>1</span></a>
-  </li>
-  <li>
-    <a href="/categories#exercise-ref">exercise <span>1</span></a>
-  </li>
-  <li>
-    <a href="/categories#course/programming-ref">course/programming <span>1</span></a>
-  </li>
-</ul>
+    <div class="post">
+  <h3 class="title"><a href="/posts/rogue-a-scala-type-safe-mongodb-dsl">Rogue: A Scala Type-Safe MongoDB DSL</a> <span class="date">2012-06-22</span></h3>
 
-  <h3>programming (3)</h3>
+  <div class="summary ellipsis">
+<p>Recently our group has been debating about switching to <a href="http://www.mongodb.org/">MongoDB</a>.
+As a number of our analysis tools are written in Scala, naturally we'd like a Scala or Java ORM.</p>
+
+<p>After some search, we've decided to explore Rogue, a type-safe DSL for querying MongoDB.
+Here's some motivation from the Foursquare engineers for developing Rogue, after using Lift for their ORM:</p>
+
+<blockquote>
+<blockquote>
+<p>Essentially, we found the querying support a bit too expressive — you can pass in a query object that doesn’t represent a valid
+query, or query against fields that aren’t part of the record. And in addition it isn’t very type-safe.
+You can ask for, say, all Venue records where mayor = “Bob”, and it happily executes that query for you, returning nothing,
+never informing you that the mayor field is not a String but a Long representing the ID of the user.
+Well, we thought we could use the Scala type system to prevent this from ever happening, and that’s what we set out to do.</p>
+</blockquote>
+</blockquote>
+</div>
+
+  <div class="more">
+    <a href="/posts/rogue-a-scala-type-safe-mongodb-dsl" class="btn btn-small">read more..</a>
+  </div>
+</div>
+<div class="post">
+  <h3 class="title"><a href="/posts/setting-up-mongodb-on-ubuntu-11-10">Setting Up MongoDB on Ubuntu 11.10</a> <span class="date">2012-06-28</span></h3>
+
+  <div class="summary ellipsis">
+<p>MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.</p>
+
+<h2 id="toc_0">Install</h2>
+
+<ul>
+<li><a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/">Install the MongoDB package.</a></li>
+</ul>
+<h2 id="toc_1">Configuration</h2>
+
+<p>I've installed my OS and /home on different partitions to make reinstalling the OS easier. So let's keep the config file and data/logs on the /home partition.</p>
+
+<pre><code># in ~ or wherever you want to put mongodb's files
+mkdir mongodb
+cd mongodb
+mkdir db log                  # Create data/log folders
+# Create a copy of conf file
+cp /etc/init/mongodb.conf .
+</code></pre>
+</div>
+
+  <div class="more">
+    <a href="/posts/setting-up-mongodb-on-ubuntu-11-10" class="btn btn-small">read more..</a>
+  </div>
+</div>
+
+<div class="pagination">
   <ul>
-      <li><a href="/posts/git-basics">Git Basics</a></li>
-      <li><a href="/posts/rogue-a-scala-type-safe-mongodb-dsl">Rogue: A Scala Type-Safe MongoDB DSL</a></li>
-      <li><a href="/posts/setting-up-mongodb-on-ubuntu-11-10">Setting Up MongoDB on Ubuntu 11.10</a></li>
+      <li class="active"><a href="/posts/index/1">1</a></li>
   </ul>
-  <h3>advice (1)</h3>
-  <ul>
-      <li><a href="/posts/how-to-ask-technical-questions">How to Ask Technical Questions</a></li>
-  </ul>
-  <h3>conference (1)</h3>
-  <ul>
-      <li><a href="/posts/mobisys-2013">Mobisys 2013</a></li>
-  </ul>
-  <h3>screen (1)</h3>
-  <ul>
-      <li><a href="/posts/motion-4-notes">Motion 4 Notes</a></li>
-  </ul>
-  <h3>talk (1)</h3>
-  <ul>
-      <li><a href="/posts/silicon-valley-s-ultimate-exit">Silicon Valley's Ultimate Exit</a></li>
-  </ul>
-  <h3>exercise (1)</h3>
-  <ul>
-      <li><a href="/posts/six-pack-shortcuts">Six Pack Shortcuts</a></li>
-  </ul>
-  <h3>course/programming (1)</h3>
-  <ul>
-      <li><a href="/posts/udacity-cs259-software-debugging">Udacity CS259: Software Debugging</a></li>
-  </ul>
+</div>
 
   </div>
 </div>

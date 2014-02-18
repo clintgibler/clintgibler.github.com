@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Clint Gibler</title>
+    <description>Clint Gibler</description>
+    <link>http://www.clintgibler.com</link>
+    <pubDate>2014-02-17</pubDate>
+    <item>
+      <title>Publish</title>
+      <link>http://www.clintgibler.com/bin/publish.sh</link>
+      <description>#!/bin/bash
+
+# usage: publish.sh "commit msg"
+# Assumes publish repo is in same level dir as this one
+publish_dir=../publish.clintgibler.github.com/
+ruhoh compile
+cp -r compiled/* $publish_dir
+#echo "git commit -am '$1'"
+cd $publish_dir
+git commit -am "$1"
+git push
+</description>
+    </item>
+  </channel>
+</rss>

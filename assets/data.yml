@@ -1,0 +1,18 @@
+title : Clint Gibler
+tagline: "Android security researcher, improviser"
+author :
+  name : Clint Gibler
+  email : clintgibler AT gmail DOT com
+  github : clintgibler
+  twitter : clintgibler
+  feedburner : feedname
+
+navigation :
+  - about
+#  - archive
+#  - tags
+#  - categories
+#  - pages
+  - posts
+  - papers
+  - books

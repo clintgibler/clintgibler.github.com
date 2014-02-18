@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Clint Gibler</title>
+    <description>Clint Gibler</description>
+    <link>http://www.clintgibler.com</link>
+    <pubDate>2014-02-17</pubDate>
+    <item>
+      <title>Title</title>
+      <link>http://www.clintgibler.com/template/example_paper_review</link>
+      <pubDate>2013-01-24</pubDate>
+      <description>&lt;p&gt;&lt;a href=""&gt;Full paper&lt;/a&gt; - &lt;a href=""&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn&amp;#39;t read)&lt;/small&gt;&lt;/h2&gt;
+
+&lt;h2 id="toc_1"&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;Abstract&lt;/p&gt;
+
+&lt;h2 id="toc_2"&gt;Review&lt;/h2&gt;
+
+&lt;h3 id="toc_3"&gt;Pros&lt;/h3&gt;
+
+&lt;p&gt;pros&lt;/p&gt;
+
+&lt;h3 id="toc_4"&gt;Cons&lt;/h3&gt;
+
+&lt;p&gt;cons&lt;/p&gt;
+
+&lt;h2 id="toc_5"&gt;Notes&lt;/h2&gt;
+
+&lt;p&gt;Notes&lt;/p&gt;
+
+&lt;h2 id="toc_6"&gt;Diagrams&lt;/h2&gt;
+
+&lt;p&gt;The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_7"&gt;Overall Dare System Architecture&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class="paper_diagram" src="/assets/media/papers/reviews/droidscope//fig2.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>

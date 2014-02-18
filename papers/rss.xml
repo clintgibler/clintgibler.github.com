@@ -1,0 +1,567 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Clint Gibler</title>
+    <description>Clint Gibler</description>
+    <link>http://www.clintgibler.com</link>
+    <pubDate>2014-02-17</pubDate>
+    <item>
+      <title>Identity, Location, Disease and More: Inferring Your Secrets from Android Public Resources</title>
+      <link>http://www.clintgibler.com/papers/identity-location-disease-and-more-inferring-your-secrets-from-android-public-resources</link>
+      <pubDate>2013-10-14</pubDate>
+      <description>&lt;p&gt;&lt;a href="http://www.cs.indiana.edu/%7Ezhou/files/fp045-zhou.pdf"&gt;Full paper&lt;/a&gt; - &lt;a href=""&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn&amp;#39;t read)&lt;/small&gt;&lt;/h2&gt;
+
+&lt;p&gt;The authors develop a proof of concept Android app with no permissions that can &amp;quot;acquire sensitive information such as a smartphone user&amp;#39;s identity, the disease condition he/she is interested in, her location and her driving route.&amp;quot;&lt;/p&gt;
+
+&lt;p&gt;More specifically:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What revealing apps has the user installed? (e.g. a diabetes or gay social network app)&lt;/li&gt;
+&lt;li&gt;Where is the user?&lt;/li&gt;
+&lt;li&gt;What is the phone owner&amp;#39;s Twitter account?&lt;/li&gt;
+&lt;li&gt;What diseases is he/she searching on the WebMD mobile app?&lt;/li&gt;
+&lt;li&gt;Stocks he/she searches in Yahoo! Finance.&lt;/li&gt;
+&lt;li&gt;What is the current travel route of the user?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The app uses 4 primary public channels of info:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Other apps installed on the phone&lt;/li&gt;
+&lt;li&gt;ARP information&lt;/li&gt;
+&lt;li&gt;Per-app data usage statistics&lt;/li&gt;
+&lt;li&gt;Speaker status (on or off)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id="toc_1"&gt;Neat techniques&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Capturing network requests and building a model of app network send/response sizes
+to automatically infer user behavior based on network packet size alone.&lt;/li&gt;
+&lt;li&gt;Using MOCK_LOCATION to more quickly and easily automate driving through routes.&lt;/li&gt;
+&lt;li&gt;Crawling driving directions from Google Maps and then running them through text-to-speech
+to know how long they would take to pronounce.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="toc_2"&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;The design of Android is based on a set of unprotected shared resources, including those inherited from Linux (e.g., Linux public directories). However, the dramatic development in Android applications (&lt;em&gt;app&lt;/em&gt; for short) makes available a large amount of public background information (e.g., social networks, public online services), which can potentially turn such originally harmless resource sharing into serious privacy breaches. In this paper, we report our work on this important yet understudied problem. We discovered three unexpected channels of information leaks on Android: per-app data-usage statistics, ARP information, and speaker status (on or off). By monitoring these channels, an app without &lt;em&gt;any&lt;/em&gt; permission may acquire sensitive information such as smartphone user&#x2019;s identity, the disease condition she is interested in, her geo-locations and her driving route, from top-of-the-line Android apps. Furthermore, we show that using existing and new techniques, this zero-permission app can both determine when its target (a particular application) is running and send out collected data stealthily to a remote adversary. These findings call into question the soundness of the design assumptions on shared resources, and demand effective solutions. To this end, we present a mitigation mechanism for achieving a delicate balance between utility and privacy of such resources.&lt;/p&gt;
+
+&lt;h2 id="toc_3"&gt;Review&lt;/h2&gt;
+
+&lt;h3 id="toc_4"&gt;Pros&lt;/h3&gt;
+
+&lt;p&gt;I feel the main contribution of the paper is enumerating the public channels of info,
+especially the per-app data usage statistics and ARP info. Most people familiar with Android
+know that there&amp;#39;s an API to see the installed packages and it&amp;#39;s unsurprising that it&amp;#39;s possible
+to check the speaker status.&lt;/p&gt;
+
+&lt;p&gt;Determining the user&amp;#39;s driving route based on a series of lengths of speech I thought was
+pretty impressive. The idea is easy to conceptualize but actually making it work in practice
+is quite a feat.&lt;/p&gt;
+
+&lt;p&gt;Overall I thought this paper was an interesting examination of what an app with no permissions
+can tell about the user.&lt;/p&gt;
+
+&lt;h3 id="toc_5"&gt;Cons&lt;/h3&gt;
+
+&lt;p&gt;Clearly a bit F.U.D-y. The abstract makes it sound like Android itself is leaking users&amp;#39;
+medical conditions and identity which in reality Android just leaks app network usage data.
+The effect is similar but in my opinion the former is almost a bit intentionally sensationalist.&lt;/p&gt;
+
+&lt;p&gt;The inferring app behavior based on network request size technique was used pretty much exactly
+from another paper, I believe from the same group. Once you know it&amp;#39;s possible to get decently
+fine-grained per-app data usage statistics the Twitter/WebMD/Yahoo! Finance results they
+demonstrate are only a logical extension.&lt;/p&gt;
+
+&lt;p&gt;I feel the route inference attack is not very scalable and relies on having a small number of
+Points of Interest that have many routes to them analyzed. This doesn&amp;#39;t seem like a general
+technique for determining user travel to/from any arbitrary location. I would have liked a
+little discussion on the feasibility or time and effort required to extend this attack to
+determining user route to/from anywhere in a reasonably sized city.&lt;/p&gt;
+
+&lt;h2 id="toc_6"&gt;Notes&lt;/h2&gt;
+
+&lt;p&gt;Most people who have done Android work know that 1) is easy to obtain with no permissions.
+However, this alone can reveal potentially quite sensitive info about the user.
+Two examples they give include: disease-specific healthcare apps (like a diabetes app) or
+specific life-style apps (e.g gay social network like Hornet).&lt;/p&gt;
+
+&lt;p&gt;2) contains the BSSID of the WAP a phone is connected to, i.e. what WiFi network you&amp;#39;re currently connected to.
+Geo-location databases can determine your location when provided the name of your WiFi network.
+I believe the READ_PHONE_STATE permission is required to see all nearby WiFi networks but with no
+permissions you can still see the current one.&lt;/p&gt;
+
+&lt;p&gt;Based on your interaction with an app, different network requests are sent. When the size of
+network requests for different events are easily distinguishable you can actually tell what
+the user has done based on 3). The authors demonstrate that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Using some location filtering (helped by 2.) and a series of time stamps of Twitter posts
+(3.) you can fairly reliably identify the exact Twitter user of the phone you&amp;#39;re on.
+This is important because many Twitter account contain the user&amp;#39;s real name and
+potentially a link to their personal website. So in some cases an app with no permissions
+can identify the real person owning the phone.&lt;/li&gt;
+&lt;li&gt;The authors profiled the WebMD mobile app and found retrieving information about each
+disease resulted in a unique response size. Thus using 3) the app can observe the
+diseases searched by the user.&lt;/li&gt;
+&lt;li&gt;A similar attack is shown to be effective on the Yahoo! Finance app with stocks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Finally, the authors show how a user&amp;#39;s driving route can be inferred using whether the speaker status is on or off (4). The key idea is that reading out specific street names and directions in Navigation takes a different amount of time based on the instructions. Given a sequence of the lengths of time Navigation is reading out directions one can infer the path / destination. The route needed to have at least 9 steps for high accuracy.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Measuring the Cost of Cybercrime</title>
+      <link>http://www.clintgibler.com/papers/measuring-the-cost-of-cybercrime</link>
+      <pubDate>2013-01-07</pubDate>
+      <description>&lt;p&gt;&lt;a href="http://weis2012.econinfosec.org/papers/Anderson_WEIS2012.pdf"&gt;Full paper&lt;/a&gt; - &lt;a href="http://scholar.google.com/scholar.bib?q=info:a716LVmi9LoJ:scholar.google.com/"&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn&amp;#39;t read)&lt;/small&gt;&lt;/h2&gt;
+
+&lt;p&gt;The authors attempt to calculate the approximate cost to individuals and society of several types of cybercrime.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Direct losses&lt;/strong&gt;: losses, damage, or other suffering felt by the victim as a consequence of a cybercrime.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Indirect losses&lt;/strong&gt;: the losses and opportunity costs imposed on society by the fact that a certain cybercrime is carried
+out, no matter whether successful or not and independent of a specific instance of that cybercrime. Indirect costs
+generally cannot be attributed to individual victims.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Defence costs&lt;/strong&gt;: prevention efforts, including direct defence costs, i.e., the cost of development, deployment, and maintenance of prevention measures, as well as indirect defence costs, such as inconvenience and opportunity costs caused by the prevention measures.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cost to society&lt;/strong&gt;: direct losses + indirect losses + defence costs&lt;/p&gt;
+
+&lt;p&gt;Criminal revenue is in practice significantly lower than direct losses and much lower than direct plus indirect losses.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Traditional frauds&lt;/strong&gt; such as tax and welfare fraud cost each of us a few hundred pounds/euros/dollars a year.
+The costs of defences, and of subsequent enforcement, are much less than the amounts stolen.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transitional frauds&lt;/strong&gt; such as payment card fraud cost citizens a few tens of pounds/euros/dollars a year.
+Online payment card fraud typically runs at 0.3% of the turnover of e-commerce firms.
+Defence costs are broadly comparable with actual losses, but the indirect costs of business foregone because of the
+fear of fraud, both by consumers and by merchants, are several times higher.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;new cyber-frauds&lt;/strong&gt; such as fake antivirus net their perpetrators relatively small sums, with common scams pulling in tens of cents/pence per year per head of population. In
+total, cyber-crooks&amp;#39; earnings might amount to a couple of dollars per citizen per year. But the indirect costs and defence costs are very substantial -- at least ten times that.
+The clean-up costs faced by users (whether personal or corporate) are the largest single component;
+owners of infected PCs may have to spend hundreds of dollars, while the average cost to each of us as citizens runs
+in the low tens of dollars per year. The costs of antivirus (to both individuals and businesses) and the cost of patching
+(mostly to businesses) are also significant at a few dollars a year each.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;: We should spend less in anticipation of computer crime (on antivirus,
+firewalls etc.) and an awful lot more on catching and punishing the perpetrators.&lt;/p&gt;
+
+&lt;h2 id="toc_1"&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;In this paper we present what we believe to be the first systematic study of the costs of cybercrime. It was prepared in response to a request from the UK Ministry of Defence following scepticism that previous studies had hyped the problem. For each of the main categories of cybercrime we set out what is and is not known of the direct costs, indirect costs and defence costs -- both to the UK and to the world as a whole. We distinguish carefully between traditional crimes that are now `cyber&amp;#39; because they are conducted online (such as tax and welfare fraud); transitional crimes whose modus operandi has changed substantially as a result of the move online (such as credit card fraud); new crimes that owe their existence to the Internet; and what we might call platform crimes such as the provision of botnets which facilitate other crimes rather than being used to extract money from victims directly. As far as direct costs are concerned, we find that traditional offences such as tax and welfare fraud cost the typical citizen in the low hundreds of pounds/Euros/dollars a year; transitional frauds cost a few pounds/Euros/dollars; while the new computer crimes cost in the tens of pence/cents. However, the indirect costs and defence costs are much higher for transitional and new crimes. For the former they may be roughly comparable to what the criminals earn, while for the latter they may be an order of magnitude more. As a striking example, the botnet behind a third of the spam sent in 2010 earned its owners around US$2.7m, while worldwide expenditures on spam prevention probably exceeded a billion dollars. We are extremely inefficient at fighting cybercrime; or to put it another way, cyber-crooks are like terrorists or metal thieves in that their activities impose disproportionate costs on society. Some of the reasons for this are well-known: cybercrimes are global and have strong externalities, while traditional crimes such as burglary and car theft are local, and the associated equilibria have emerged after many years of optimisation. As for the more direct question of what should be done, our figures suggest that we should spend less in anticipation of cybercrime (on antivirus, firewalls, etc.) and more in response -- that is, on the prosaic business of hunting down cyber-criminals and throwing them in jail.&lt;/p&gt;
+
+&lt;h2 id="toc_2"&gt;Review&lt;/h2&gt;
+
+&lt;h3 id="toc_3"&gt;Pros&lt;/h3&gt;
+
+&lt;p&gt;I thought the paper presented an interesting and thoughtful way to break down the types of cybercrime costs (direct, indirect, etc).&lt;/p&gt;
+
+&lt;p&gt;The authors also did a great job surveying and aggregating different types of cyber crimes and their associated costs.&lt;/p&gt;
+
+&lt;h3 id="toc_4"&gt;Cons&lt;/h3&gt;
+
+&lt;p&gt;Many of the costs are heavily estimations and may easily be off up to an order of magnitude, which the authors readily admit.
+This is understandable, as it&amp;#39;s difficult to get precise numbers.&lt;/p&gt;
+
+&lt;p&gt;There was limited novelty of technique / methodology, they primarily reference and aggregate existing work.
+To be fair, the latter is the intention of the paper.&lt;/p&gt;
+
+&lt;h2 id="toc_5"&gt;Notes&lt;/h2&gt;
+
+&lt;p&gt;Choose to estimate global figures, as sometimes there is only global or only UK data. They scale UK-only data based on that
+it&amp;#39;s roughly 5% of world GDP.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Criminal revenue&lt;/strong&gt;: the monetary equivalent of the gross receipts from a crime, excluding any `lawful&amp;#39; business
+expenses of the criminal. (e.g. paying for hosting services)&lt;/p&gt;
+
+&lt;h3 id="toc_6"&gt;Examples of Losses&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Direct losses&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;money withdrawn from victim accounts&lt;/li&gt;
+&lt;li&gt;time and effort to reset account credentials (for both banks and consumers)&lt;/li&gt;
+&lt;li&gt;distress suffered by victims&lt;/li&gt;
+&lt;li&gt;secondary costs of overdrawn accounts: deferred purchases, inconvenience of not having access to money when needed&lt;/li&gt;
+&lt;li&gt;lost attention and bandwidth caused by spam messages, even if they are not reacted to&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Indirect losses&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;loss of trust in online banking, leading to reduced revenues from electronic transaction
+fees, and higher costs for maintaining branch staff and cheque clearing facilities&lt;/li&gt;
+&lt;li&gt;missed business opportunity for banks to communicate with their customers by email&lt;/li&gt;
+&lt;li&gt;reduced uptake by citizens of electronic services as a result of lessened trust in online transactions&lt;/li&gt;
+&lt;li&gt;efforts to clean-up PCs infected with the malware for a spam sending botnet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Defence costs&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;security products such as spam filters, antivirus, and browser extensions to protect users&lt;/li&gt;
+&lt;li&gt;security services provided to individuals, such as training and awareness measures&lt;/li&gt;
+&lt;li&gt;security services provided to industry, such as website &#x2018;take-down&#x2019; services&lt;/li&gt;
+&lt;li&gt;fraud detection, tracking, and recuperation efforts&lt;/li&gt;
+&lt;li&gt;law enforcement&lt;/li&gt;
+&lt;li&gt;the inconvenience of missing an important message falsely classified as spam&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Defence costs, like indirect losses, are largely independent of individual victims. Often it is even difficult to allocate them to individual types of cybercrime. Defences can target the actual crimes or their supporting infrastructure, and the costs can be incurred in anticipation of or reaction to crimes, the latter being to deter copycats.&lt;/p&gt;
+
+&lt;p&gt;It is possible to spend too much on defense -- 9/11 terrorist attacks costed $500,000 to carry out and by 2008 U.S. had spent
+over $3 trillion on defense costs and wars in Afghanistan and Iraq.&lt;/p&gt;
+
+&lt;p&gt;The misallocation of resources associated with cybercrime results mostly from economic and political factors rather
+than from behavioural ones. Globalisation means that for much online crime, the perpetrators and victims are in different jurisdictions.
+This reduces both the motivation and the opportunity for police action.&lt;/p&gt;
+
+&lt;h3 id="toc_7"&gt;Types of Fraud Considered&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Online payment card fraud&lt;/strong&gt; - may get charged back to the merchant, the bank, or bounched back to the owner.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Online banking fraud&lt;/strong&gt; - user banking credentials obtained via phishing or keyloggers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;In-person payment card fraud&lt;/strong&gt; - commonly attackers use tampered PED terminals or ATM skimmers to capture card data and
+make forged cards that operate in fall-back mag-stripe mode.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fake antivirus&lt;/strong&gt; - a pop-up on a website warns the user that their computer is infected with malware, the link cause fake antivirus to be downloaded and run.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Infringing pharmaceuticals&lt;/strong&gt; - direct costs: risk of fraud or health risks. indirect: spam compaigns.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Copyright-infringing software&lt;/strong&gt; - societal costs: lost licensing revenues to copyright and brand holders. 20% of one survey
+responded that they had purchased software advertised in spam email.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Copyright-infringing music and video&lt;/strong&gt; - &amp;quot;Job losses among music company middle managers are just the creative destruction inherent in technological progress.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;#39;Stranded traveller&amp;#39; scams&lt;/strong&gt; - compromised email account emails friends, &amp;quot;I&amp;#39;m stuck in [place] and was mugged, need money to leave.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;#39;Fake escrow&amp;#39; scams&lt;/strong&gt; - victim believes they won an online auction for a car/motorbike. Seller proposes using a third-party escrow for the transaction, car is never delivered.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Advanced fee fraud&lt;/strong&gt; - aka as the Nigerian prince. Pay a little money up front to get a huge payback.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PABX fraud&lt;/strong&gt; - fraud losses from telephony, fixed and mobile. PABX: criminals reconfigure company&amp;#39;s telephone system
+to accept incoming calls and relay them onward. They then sell phone cards that use it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Industrial cyber-espionage and extortion&lt;/strong&gt; - there is no reliable evidence of the extent or cost of industrial cyber-espionage
+and extortion, we do not include any figures for these crimes in our estimates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fiscal fraud&lt;/strong&gt; - tax and welfare fraud committed against the government. Criminals in the USA have been impersonating citizens
+by electronically filing fraudulent tax returns using stolen lists of names and Social Security numbers.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Other commercial fraud&lt;/strong&gt; - insider trading, embezzlement, control fraud (executives loot their company). Not considered in
+this paper because they involve the exercise of power in interpersonal and institutional relationships rather than
+claims made through an automated system.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="toc_8"&gt;The Infrastructure Supporting Cybercrime&lt;/h3&gt;
+
+&lt;p&gt;While these activities are often referred to directly as cybercrime, they enable many different crimes.
+They estimate the infrastructure&amp;#39;s cost separately to avoid double counting.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Botnets&lt;/strong&gt; - Herley and Florencio estimated an upper bound to botnet herders&amp;#39; income of 50c per machien per annum.&lt;/p&gt;
+
+&lt;p&gt;It is very difficult to estimate the size of botnets. Previous approaches have relied on counting number of unique IPs
+    associated with botnet activity. However, dynamic IP address allocation can cause the same machine to show up as many
+    IP addresses, causing the number of believed bots to be off by an order of magnitude.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Botnet mitigation by consumers&lt;/strong&gt; - manual updates, behind the scenes updates by software vendors.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Botnet mitigation by industry&lt;/strong&gt; - ISPs and hosting providers who act against infected machines on their networks, antivirus companies.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Other botnet mitigation costs&lt;/strong&gt; - malware may drive users to a given more locked down platform, antivirus adoption, software vendors patching products, law enforcement.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Pay-per-install&lt;/strong&gt; - malware authors pay a PPI operator to install their malware on X PCs in a geographic area for a fee.&lt;/p&gt;
+
+&lt;h3 id="toc_9"&gt;Final Thoughts&lt;/h3&gt;
+
+&lt;p&gt;Traditional acquisitive crimes, such as burglary and car theft, tend to have two properties. The first is that the impact
+on the victim is greater in financial terms than either the costs borne in anticipation of crime, or the response costs
+afterwards such as the police and the prisons.&lt;/p&gt;
+
+&lt;p&gt;Drilling down further into the victim costs, we find that for nonviolent crimes the value of the property stolen or damaged is much greater than the cost of lost output, victim services or
+emotional impact.&lt;/p&gt;
+
+&lt;p&gt;The criminal justice system recognises the quite disproportionate social costs of robbery as opposed to burglary.
+While robbers get longer sentences than burglars do, cyber-crooks get shorter ones. This is probably because cyber-crimes,
+being impersonal, evoke less resentment and vindictiveness. Indeed, the crooks are simply being
+rational: while terrorists try to be annoying as possible, fraudsters are quite the opposite and
+try to minimise the probability that they will be the targets of effective enforcement action.&lt;/p&gt;
+
+&lt;p&gt;Why does cyber-crime carry such high indirect and defence costs? Many of the reasons have
+been explored in the security-economics literature: there are externalities, asymmetric information,
+and agency effects galore. Globalisation undermines the incentives facing local police
+forces, while banks, merchants and service providers engage in liability shell games. We are also
+starting to understand the behavioural aspects: terrorist crimes are hyper-salient because the
+perpetrators go out of their way to be as annoying as possible, while most online crooks go out
+of their way to be invisible.&lt;/p&gt;
+
+&lt;h2 id="toc_10"&gt;Diagrams&lt;/h2&gt;
+
+&lt;p&gt;The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img class="paper_diagram" src="/assets/media/papers/reviews/measuring_cybercrime_cost//cost_estimates.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>MoCFI: A Framework to Mitigate Control-Flow Attacks on Smartphones</title>
+      <link>http://www.clintgibler.com/papers/mocfi-a-framework-to-mitigate-control-flow-attacks-on-smartphones</link>
+      <pubDate>2012-07-03</pubDate>
+      <description>&lt;p&gt;&lt;a href="http://www.trust.rub.de/media/emma/veroeffentlichungen/2012/04/11/Davi_MoCFI.pdf"&gt;Full paper&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn&amp;#39;t read)&lt;/small&gt;&lt;/h2&gt;
+
+&lt;p&gt;MoCFI is the first general control-flow integrity (CFI) framework for smartphone platforms.
+It protects against runtime and control-flow attacks (e.g. code injection or ROP) by enforcing that jumps
+  go to an expected location.
+The implementation is on iOS though the overall technique should be applicable to Android (which also uses ARM).
+Note: requires jail-breaking to set an environment variable, install a shared library, and allow the library to rewrite app code
+  during load-time.&lt;/p&gt;
+
+&lt;p&gt;MoCFI consists of the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;IDA Pro is used to perform static analysis on an iOS app to determine branch instructions that may be exploited for a control-flow attack.&lt;/li&gt;
+&lt;li&gt;Possible targets for each indirect branch are calculated and a Patchfile is generated that replaces these branches with trampolines to
+the &lt;em&gt;MoCFI&lt;/em&gt; module.&lt;/li&gt;
+&lt;li&gt;At load-time, a binary rewriting module applies the Patchfile to the app&amp;#39;s image in memory.
+This method leaves the original app code unchanged, leaving the code signature intact.&lt;/li&gt;
+&lt;li&gt;At run-time, each relevant branch now passes control to &lt;em&gt;MoCFI&lt;/em&gt; which validates that the branch target resolves to one of
+the valid targets calculated by the static analysis step.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id="toc_1"&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;Runtime and control-&#xFB02;ow attacks (such as code injection or return-oriented programming) constitute one of the
+most severe threats to software programs. These attacks
+are prevalent and have been recently applied to smartphone
+applications as well, of which hundreds of thousands are
+downloaded by users every day. While a framework for
+control-&#xFB02;ow integrity (CFI) enforcement, an approach to
+prohibit this kind of attacks, exists for the Intel x86 platform, there is no such a solution for smartphones.&lt;/p&gt;
+
+&lt;p&gt;In this paper, we present a novel framework, MoCFI
+(Mobile CFI), that provides a general countermeasure
+against control-&#xFB02;ow attacks on smartphone platforms by enforcing CFI. We show that CFI on typical smartphone platforms powered by an
+ARM processor is technically involved due to architectural differences between ARM and Intel x86,
+as well as the speci&#xFB01;cs of smartphone OSes. Our framework performs CFI on-the-&#xFB02;y during runtime without requiring
+the application&#x2019;s source code. For our reference implementation we chose Apple&#x2019;s iOS, because it has been an attractive target for control-&#xFB02;ow
+attacks. Nevertheless, our framework is also applicable to other ARM-based devices such
+as Google&#x2019;s Android. Our performance evaluation demonstrates that MoCFI is ef&#xFB01;cient and does not induce notable
+overhead when applied to popular iOS applications.&lt;/p&gt;
+
+&lt;h2 id="toc_2"&gt;Other Details&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Control-flow integrity&lt;/em&gt; (CFI) - when the control-flow of a program follows only the legitimate paths determined in advance.&lt;/li&gt;
+&lt;li&gt;Compiler approaches won&amp;#39;t work because source code is not available and the solutiion would be specific to a given compiler,
+  which would not be feasible as both LLVM and GCC are widely used for iOS.&lt;/li&gt;
+&lt;li&gt;CFI on ARM is more involved than on desktop PCs due to several architectural differences (details Section 3.3)
+
+&lt;ul&gt;
+&lt;li&gt;The program counter is a general-purpose register&lt;/li&gt;
+&lt;li&gt;The processor may switch the instruction set at runtime&lt;/li&gt;
+&lt;li&gt;There are no dedicated return instructions&lt;/li&gt;
+&lt;li&gt;Control-flow instructions may load several registers as a side-effect&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Section 2.1 and 5 have some useful info about the ARM architecture.&lt;/li&gt;
+&lt;li&gt;Section 2.2 - Selected iOS Security Features
+
+&lt;ul&gt;
+&lt;li&gt;W xor X (Writable xor eXecutable) memory pages since iOS v2.0&lt;/li&gt;
+&lt;li&gt;Cannot prevent ROP attacks that leverage existing and signed code pieces.&lt;/li&gt;
+&lt;li&gt;Stack-Smashing Protector (SSP) - canaries between local variables and control-flow info to detect stack smashing attacks.&lt;/li&gt;
+&lt;li&gt;ASLR since iOS v4.3&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;The current prototype protects an application&amp;#39;s main code but not dynamic libraries that are loaded into the process.&lt;/li&gt;
+&lt;li&gt;Current prototype also does not detect attacks exploiting exception handlers (when an adversary rewrites pointers to an
+exception handler and then deliberately causes an exception).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="toc_3"&gt;Diagrams&lt;/h2&gt;
+
+&lt;p&gt;The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Diagram of Control Flow Attacks&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/assets/media/papers/reviews/mocfi/control_flow_attack_overview.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_4"&gt;&lt;em&gt;MoCFI&lt;/em&gt; Architecture Overview&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/assets/media/papers/reviews/mocfi/mocfi_architecture.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_5"&gt;The Trampolines Inserted into Apps To Redirect Control Flow&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/assets/media/papers/reviews/mocfi/trampoline_approach.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_6"&gt;Architecture of the Run-Time Module (Branch Enforcer)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/assets/media/papers/reviews/mocfi/runtime_module_overview.png"&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Retargeting Android Applications to Java Bytecode</title>
+      <link>http://www.clintgibler.com/papers/retargeting-android-applications-to-java-bytecode</link>
+      <pubDate>2013-01-15</pubDate>
+      <description>&lt;p&gt;&lt;a href="http://siis.cse.psu.edu/dare/papers/octeau-fse12.pdf"&gt;Full paper&lt;/a&gt; - &lt;a href="http://scholar.google.com/scholar.bib?q=info:nb2jU3F3eXgJ:scholar.google.com/"&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn&amp;#39;t read)&lt;/small&gt;&lt;/h2&gt;
+
+&lt;p&gt;This paper expands on &lt;a href="http://siis.cse.psu.edu/ded/publications.html"&gt;ded&lt;/a&gt; to more effectively convert Dalvik bytecode to Java class files (successfully retarged 99.99% of
+tested classes, 99.64% of apps&amp;#39; conversion completely verifiable).&lt;/p&gt;
+
+&lt;h4 id="toc_1"&gt;Contributions&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We introduce the Tyde intermediate representation for structured semantic mapping between the VMs. All 257 Dalvik instructions are translated using only 9 translation rules.&lt;/li&gt;
+&lt;li&gt;Because sound bytecode typing is necessary for verifiability, we use a strong constraint-based type inference algorithm.&lt;/li&gt;
+&lt;li&gt;We introduce code transformations to fix unverifiable input bytecode. In addition to making the code verifiable,
+these transformations accurately mirror VM runtime behavior.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Retargeting took 20 minutes for 1,100 apps. (top 50 most popular apps in the 22 app categories as of Sept 1, 2010)
+The complete processing of all applications including Dalvik pre-verification (modi&#xFB01;ed Dalvik verifier), retargeting (&lt;em&gt;Dare&lt;/em&gt;)
+and assembly (Jasmin) took less than 70 compute-minutes.&lt;/p&gt;
+
+&lt;p&gt;Over 20% of applications in the sample have unverifiable Dalvik bytecode in at least one class.&lt;/p&gt;
+
+&lt;p&gt;We are not concerned with optimality but only with semantic equivalence.&lt;/p&gt;
+
+&lt;p&gt;The insight behind Tyde is that, by typing all instruction arguments, load/store operations can be translated independently of opcodes.&lt;/p&gt;
+
+&lt;h4 id="toc_2"&gt;Translation Process&lt;/h4&gt;
+
+&lt;p&gt;The application bytecode is initially translated into the Tyde intermediate representation (IR) in three steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the &lt;em&gt;.dex&lt;/em&gt; file is parsed and code structures, methods and the global constant pool are interpreted and annotated,&lt;/li&gt;
+&lt;li&gt;a control &#xFB02;ow graph is generated and&lt;/li&gt;
+&lt;li&gt;register types used in ambiguous instructions are inferred.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Java bytecode is thereafter generated from this IR in three phases:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a pre-processing step generates labels and maps registers to local variables,&lt;/li&gt;
+&lt;li&gt;the IR is translated to Jasmin code, and&lt;/li&gt;
+&lt;li&gt;the Jasmin tool generates the final &lt;em&gt;.class&lt;/em&gt; files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="toc_3"&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;The Android OS has emerged as the leading platform for SmartPhone applications. However, because Android applications are compiled from Java source into platform-specific Dalvik bytecode, existing program analysis tools cannot be used to evaluate their behavior. This paper develops and evaluates algorithms for retargeting Android applications received from markets to Java class files. The resulting Dare tool uses a new intermediate representation to enable fast and accurate retargeting. Dare further applies strong constraint solving to infer typing information and translates the 257 DVM opcodes using only 9 translation rules. It also handles cases where the input Dalvik bytecode is unverifiable. We evaluate Dare on 1,100 of the top applications found in the free section of the Android market and successfully retarget 99.99% of the 262,110 associated classes. Further, whereas existing tools can only fully retarget about half of these applications, Dare can recover over 99% of them. In this way, we open the door to users, developers and markets to use the vast array of program analysis tools to ensure the correct operation of Android applications.&lt;/p&gt;
+
+&lt;h2 id="toc_4"&gt;Review&lt;/h2&gt;
+
+&lt;h3 id="toc_5"&gt;Pros&lt;/h3&gt;
+
+&lt;p&gt;This paper has great detail on the comparison between Java and Dalvik bytecode.&lt;/p&gt;
+
+&lt;p&gt;The translation rules are elegant and insightful- creating 9 rules to translate 257 opcodes is impressive.&lt;/p&gt;
+
+&lt;h3 id="toc_6"&gt;Cons&lt;/h3&gt;
+
+&lt;p&gt;They claim to be a more systematic approach to &lt;em&gt;ded&lt;/em&gt;, but rather than comparing them they say a direct comparison doesn&amp;#39;t make sense.&lt;/p&gt;
+
+&lt;p&gt;I wish they had given more details about the hardware used for the evaluation performance stats.&lt;/p&gt;
+
+&lt;h2 id="toc_7"&gt;Notes&lt;/h2&gt;
+
+&lt;p&gt;Dalvik instructions are vastly different from Java instructions. DVM bytecode has 257 different instructions and 3
+pseudo-instructions. Dalvik instructions are two to ten bytes long,
+and pseudo-instructions have a variable length. The DVM has substantially more instruction formats (over 20) than the JVM.&lt;/p&gt;
+
+&lt;p&gt;The DVM is register-based, whereas the JVM is stack-based.&lt;/p&gt;
+
+&lt;p&gt;During the path-sensitive type verification process, the Java verifier considers that any instruction in a try block may throw an
+exception. In reality, not all instructions in each try block are able to throw exceptions. Therefore, the Java verifier considers some
+unfeasible execution paths. On the other hand, the Dalvik verifier does not consider these unfeasible paths.&lt;/p&gt;
+
+&lt;p&gt;In Tyde, we introduce the notion of typed registers. It adds two elements to Dalvik registers: a type (&lt;em&gt;tau&lt;/em&gt;)
+and information about whether the register is a source or destination register (represented by terminals &lt;em&gt;delta(s)&lt;/em&gt; and &lt;em&gt;delta(d)&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;While parsing instructions, type information for registers is determined.
+For example, the types of several unary and binary operators can be known from their opcode, e.g., an &lt;em&gt;add-long&lt;/em&gt; instruction takes
+two long integers as sources and a long integer as destination. Also, during this parsing step, for every
+instruction which uses a constant pool reference, a new Java constant is generated on the fly. The only exception is when the
+instruction is an ambiguous numeric constant assignment. In that case, type information is needed before the constant can be created.&lt;/p&gt;
+
+&lt;p&gt;Type inference for Dalvik bytecode uses the following approach: First we generate constraints on types based on definitions and uses.
+These constraints are then solved to infer unknown types. Note that our goal is not to determine types for all variables.&lt;/p&gt;
+
+&lt;p&gt;A Dalvik code in Tyde IR is translated into Java bytecode in three steps.
+In the first step, registers are mapped to Java local variables and labels are generated to support control-flow instructions.
+In the second step, instructions in Tyde IR are converted to Jasmin instructions (Jasmin is a Java bytecode assembler).
+The third step is to use Jasmin to generate Java &lt;em&gt;.class&lt;/em&gt; bytecode.&lt;/p&gt;
+
+&lt;h4 id="toc_8"&gt;Observed Errors&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Improper references&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;References to classes which are not available within the application or in the core Android classes. A special case is when
+the superclass of a class is missing; then the class is trivially unverifiable and is not even linked by the DVM.
+
+&lt;ul&gt;
+&lt;li&gt;Apps commonly use private Android APIs.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;References to methods or fields which are non-existent or not accessible (e.g., private member).
+
+&lt;ul&gt;
+&lt;li&gt;Developers often include entire libraries to be able to use some classes from these libraries.
+Parts of the included libraries sometimes make calls to other libraries, which are not themselves included with the
+Android application.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Typing and other issues&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Invalid typing caused by malformed class or member identifier, illegal access flag, etc.&lt;/p&gt;
+
+&lt;h2 id="toc_9"&gt;Diagrams&lt;/h2&gt;
+
+&lt;p&gt;The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_10"&gt;Overall Dare System Architecture&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class="paper_diagram" src="/assets/media/papers/reviews/dare//fig2.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_11"&gt;Example of Code Representation at each Step&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class="paper_diagram" src="/assets/media/papers/reviews/dare//fig3.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id="toc_12"&gt;Tyde IR Construction&lt;/h3&gt;
+
+&lt;p&gt;&lt;img class="paper_diagram" src="/assets/media/papers/reviews/dare//fig7.png"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>

@@ -1,362 +1,413 @@
 <?xml version="1.0"?>
 <rss version="2.0">
   <channel>
-    <title>ClintGibler.com</title>
+    <title>Clint Gibler</title>
+    <description>Clint Gibler</description>
     <link>http://www.clintgibler.com</link>
-    <pubDate>2013-07-21 17:23:16 -0700</pubDate>
+    <pubDate>2014-02-17</pubDate>
     <item>
-      <title>Setting Up MongoDB on Ubuntu 11.10</title>
-      <link>http://www.clintgibler.com/programming/setting-up-mongodb-on-ubuntu-11-10</link>
-      <pubDate>2012-06-28</pubDate>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;title&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/title&gt;
-    &lt;meta name="author" content="Clint Gibler"&gt;
+      <title>About</title>
+      <link>http://www.clintgibler.com/about</link>
+      <description>&lt;h2 id="toc_0"&gt;Education&lt;/h2&gt;
 
-    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
-    &lt;!--[if lt IE 9]&gt;
-      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
-    &lt;![endif]--&gt;
+&lt;p&gt;I graduated from &lt;a href="http://case.edu/"&gt;Case Western Reserve University&lt;/a&gt; in 2009 with a BS in Computer Science.
+There I was a member of the improv troupe &lt;a href="http://improv.case.edu/"&gt;IMPROVment&lt;/a&gt;, the ACM group, the
+International Collegiate Programming Competition team, and Model UN.&lt;/p&gt;
 
-    &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.8170226238682936" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/stylesheets/style.css?0.17555640249439564" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.47508825005233724" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;p&gt;I started attending &lt;a href="http://ucdavis.edu/"&gt;UC Davis&lt;/a&gt; in 2009 as a Computer Science PhD student focusing
+in computer security.
+As you can see on the home page, my research has primarily focused on the Android
+  smartphone OS, though my security interests are far more broad, including web
+  security, malware, and more.&lt;/p&gt;
 
- 
+&lt;h2 id="toc_1"&gt;Activities&lt;/h2&gt;
 
-    &lt;!-- Le fav and touch icons --&gt;
-  &lt;!-- Update these with your own images
-    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
-    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
-    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
-    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
-  --&gt;
-  &lt;/head&gt;
+&lt;p&gt;I tend to be drawn to a diverse range of topics, including psychology and screen writing / video production.
+Overall, I&amp;#39;d say my biggest hobbies are martial arts and improv comedy.&lt;/p&gt;
 
-  &lt;body&gt;
+&lt;p&gt;I did &lt;a href="http://en.wikipedia.org/wiki/Sh%C5%8Drin-ry%C5%AB"&gt;Shorin-ryu&lt;/a&gt; karate for about six years under the fantastic &lt;a href="http://www.karatecincinnati.com/"&gt;Sensei Nishime&lt;/a&gt;.
+Their whole family is incredibly talented and friendly.&lt;/p&gt;
 
-    &lt;div class="navbar"&gt;
-      &lt;div class="navbar-inner"&gt;
-        &lt;div class="container"&gt;
-          &lt;a class="brand" href="/"&gt;ClintGibler.com&lt;/a&gt;
-          &lt;ul class="nav"&gt;
-              
-                &lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
-              
-                &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
-              
-                &lt;li&gt;&lt;a href="/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
-              
-                &lt;li&gt;&lt;a href="/pages"&gt;Pages&lt;/a&gt;&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+&lt;p&gt;More recently, I&amp;#39;ve been doing a fair amount of improv comedy. I first started doing improv comedy my
+  freshmen year at Case with IMPROVment.
+We did primarily shortform improv including a number of musical games.
+Since I&amp;#39;ve been at UC Davis, I&amp;#39;ve been a part of &lt;a href="http://www.birdstriketheatre.com"&gt;Birdstrike Theatre&lt;/a&gt;.
+Birdstrike nearly exclusively does longform improv, which has been a fun change of pace.&lt;/p&gt;
 
-    &lt;div class="container"&gt;
-
-      &lt;div class="content"&gt;
-        &lt;div class="page-header"&gt;
-  &lt;h1&gt;Setting Up MongoDB on Ubuntu 11.10 &lt;/h1&gt;
-&lt;/div&gt;
-
-&lt;div class="row"&gt;
-  &lt;div class="span8"&gt;
-    &lt;p&gt;MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.&lt;/p&gt;
-
-&lt;h2 id="toc_0"&gt;Install&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/"&gt;Install the MongoDB package.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="toc_1"&gt;Configuration&lt;/h2&gt;
-
-&lt;p&gt;I&amp;#39;ve installed my OS and /home on different partitions to make reinstalling the OS easier. So let&amp;#39;s keep the config file and data/logs on the /home partition.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# in ~ or wherever you want to put mongodb&amp;#39;s files
-mkdir mongodb
-cd mongodb
-mkdir db log                  # Create data/log folders
-# Create a copy of conf file
-cp /etc/init/mongodb.conf .
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We want to store the data and log dirs in a custom location so they aren&amp;#39;t wiped in OS reinstall, so change mongodb.conf to the following:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;dbpath=/home/&amp;lt;user&amp;gt;/mongodb/db
-...
-logpath=/home/&amp;lt;user&amp;gt;/mongodb/log/mongodb.log
-...
-auth = true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="toc_2"&gt;Security&lt;/h2&gt;
-
-&lt;p&gt;I&amp;#39;m going to skip a lot of important details, please read:
-&lt;a href="http://www.mongodb.org/display/DOCS/Security+and+Authentication"&gt;MongoDB&amp;#39;s Security and Authentication&lt;/a&gt;.
-The page lists default ports for services, basic firewall rules and other useful info.&lt;/p&gt;
-
-&lt;h4 id="toc_3"&gt;Things to note&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;By default MongoDB assumes you have carefully set up your firewall/networking environment to restrict who can access the server(s).
-
-&lt;ul&gt;
-&lt;li&gt;&amp;quot;By default, security mode is off.&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;By default, a mongod server will listen on all available IP addresses on a machine. You can restrict this to a single IP address with the
-&amp;#39;bind_ip&amp;#39; configuration option for mongod.&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Are passwords sent over the wire encrypted?
-
-&lt;ul&gt;
-&lt;li&gt;Yes. (Actually a nonce-based digest is passed.)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Are database operations, after authenticating, passed over the wire encrypted?
-
-&lt;ul&gt;
-&lt;li&gt;Not by default. See the &lt;a href="http://docs.mongodb.org/manual/administration/ssl/"&gt;SSL doc page&lt;/a&gt; for more information.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We enabled secure mode by setting &lt;em&gt;auth = true&lt;/em&gt; in mongodb.conf above.&lt;/p&gt;
-
-&lt;h3 id="toc_4"&gt;Create Users&lt;/h3&gt;
-
-&lt;p&gt;Create admin user:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; // use admin db
-$ mongo localhost/admin
-&amp;gt; db.addUser(&amp;quot;theadmin&amp;quot;, &amp;quot;anadminpassword&amp;quot;)
-&amp;gt; // authenticate as admin
-&amp;gt; db.auth(&amp;quot;theadmin&amp;quot;, &amp;quot;anadminpassword&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Create read/write user:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; use somedb
-&amp;gt; db.addUser(&amp;quot;joe&amp;quot;, &amp;quot;passwordForJoe&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Create read user:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; use somedb
-&amp;gt; db.addUser(&amp;quot;guest&amp;quot;, &amp;quot;passwordForGuest&amp;quot;, true)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id="toc_5"&gt;Secure Mode with Sharded Clusters and Replica Sets&lt;/h3&gt;
-
-&lt;p&gt;From a client&amp;#39;s perspective, communicating with a sharded cluster or replica set is identical to single-server authentication.
-However, servers use a &lt;em&gt;key file&lt;/em&gt; to authenticate internal communication.&lt;/p&gt;
+&lt;p&gt;Shortform? Longform? From &lt;a href="http://en.wikipedia.org/wiki/Improvisational_theatre#Improvisational_comedy"&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;A key file must contain at least six Base64 characters and be no larger than 1KB (whitespace included). Whitespace characters are stripped.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Shortform improv consists of short scenes usually constructed from a predetermined game, structure, or idea and driven by an audience suggestion.&lt;/p&gt;
+
+&lt;p&gt;Longform improv performers create shows in which short scenes are often interrelated by story, characters, or themes.
+Longform shows may take the form of an existing type of theatre, for example a full-length play or Broadway-style musical such as Spontaneous Broadway.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;Since the key file is stored in a file and not typed, I see no reason not to make it close to 1KB. A simple generation using &lt;em&gt;mkpasswd&lt;/em&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for i in `seq 0 N`; do mkpasswd -S &amp;lt;salt&amp;gt; -s $i &amp;gt;&amp;gt; key; done
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;where salt is 2 characters and N is the number of passwords to generate. I found N = ~70 to create key files close to 1KB.
-To include even more characters you can remove newlines as MongoDB will strip them anyway.&lt;/p&gt;
-
-&lt;p&gt;Make sure to set permissions restrictively on &lt;em&gt;key&lt;/em&gt;, as MongoDB will exit immediately if the permissions are too open (on *nix up to 700 is allowed).
-Also note that MongoDb will complain if there&amp;#39;s any &amp;quot;.&amp;quot; in the key file, so replace them with some other characters.&lt;/p&gt;
-
-&lt;h2 id="toc_6"&gt;Running&lt;/h2&gt;
-
-&lt;p&gt;Since we&amp;#39;re placing the db data and &lt;em&gt;mongodb.conf&lt;/em&gt; in custom locations we need to slightly customize how we run mongodb.&lt;/p&gt;
-
-&lt;h3 id="toc_7"&gt;Shell script&lt;/h3&gt;
-
-&lt;p&gt;You can use a simple shell script, like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#!/bin/bash
-mongod --config /path/to/mongodb.conf --keyFile /path/to/key
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id="toc_8"&gt;As a service&lt;/h3&gt;
-
-&lt;p&gt;This is the &lt;a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/"&gt;recommended method&lt;/a&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo service mongodb start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/mongodb start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Making these methods work using our customized install settings requires a few changes.&lt;/p&gt;
-
-&lt;p&gt;To modify the default service behavior edit &lt;em&gt;/etc/init/mongodb.conf&lt;/em&gt; (spacing changed to improve readability):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Original:
-if [ &amp;quot;x$ENABLE_MONGODB&amp;quot; = &amp;quot;xyes&amp;quot; ]; then exec start-stop-daemon --start --quiet
-       --chuid mongodb
-       --exec  /usr/bin/mongod --
-       --config /etc/mongodb.conf; fi
-# I modified to:
-if # same as before up to
-       --chuid &amp;lt;custom_user&amp;gt;
-       --exec  /usr/bin/mongod --
-       --config /home/&amp;lt;user&amp;gt;/mongodb/mongodb.conf
-       --keyFile /home/&amp;lt;user&amp;gt;/mongodb/key; fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Running as the default mongodb user is probably a good idea unless you have a specific reason not to.
-Now using &lt;em&gt;service&lt;/em&gt; to start/stop mongodb will use our custom settings.&lt;/p&gt;
-
-    &lt;hr&gt;
-    &lt;div class="pagination"&gt;
-      &lt;ul&gt;
-        &lt;ul&gt;
-            &lt;li class="prev"&gt;&lt;a href="/programming/rogue-a-scala-type-safe-mongodb-dsl" title="Rogue: A Scala Type-Safe MongoDB DSL"&gt;&amp;larr; Previous&lt;/a&gt;&lt;/li&gt;
-
-            &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
-
-            &lt;li class="next disabled"&gt;&lt;a&gt;Next &amp;rarr;&lt;/a&gt;
-        &lt;/ul&gt;
-      &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;hr&gt;
-    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
-&lt;script&gt;
-    var disqus_developer = 1;
-    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-&lt;/script&gt;
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-&lt;a href="http://disqus.com" class="dsq-brlink"&gt;blog comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;
-
-  &lt;/div&gt;
-  
-  &lt;div class="span4"&gt;
-    &lt;h4&gt;Published&lt;/h4&gt;
-    &lt;div class="date"&gt;&lt;span&gt;2012-06-28&lt;/span&gt;&lt;/div&gt;
-    &lt;br&gt;
-    &lt;h4&gt;Categories&lt;/h4&gt;
-    &lt;ul class="tag_box"&gt;
-      &lt;li&gt;
-        &lt;a href="/categories#programming-ref"&gt;programming &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;    &lt;/ul&gt;
-    &lt;br&gt;
-    &lt;h4&gt;Tags&lt;/h4&gt;
-    &lt;ul class="tag_box"&gt;
-      &lt;li&gt;
-        &lt;a href="/tags#mongodb-ref"&gt;mongodb &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;      &lt;li&gt;
-        &lt;a href="/tags#linux-ref"&gt;linux &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-      &lt;/div&gt;
-
-      &lt;footer&gt;
-        &lt;p&gt;&amp;copy; Clint Gibler 2012 
-          with help from &lt;a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework"&gt;ruhoh&lt;/a&gt;
-          and &lt;a href="http://twitter.github.com/bootstrap/" target="_blank"&gt;Twitter Bootstrap&lt;/a&gt;
-        &lt;/p&gt;
-      &lt;/footer&gt;
-
-    &lt;/div&gt; &lt;!-- /container --&gt;
-
-    &lt;!-- Google Prettify --&gt;
-&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  var pres = document.getElementsByTagName("pre");
-  for (var i=0; i &lt; pres.length; ++i) {
-    pres[i].className = "prettyprint linenums";
-  }
-  prettyPrint();
-&lt;/script&gt;
-&lt;!-- end Google Prettify --&gt;
-    &lt;script&gt;
-  var _gaq=[['_setAccount','UA-37489513-1'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+&lt;/blockquote&gt;
 </description>
     </item>
     <item>
-      <title>Rogue: A Scala Type-Safe MongoDB DSL</title>
-      <link>http://www.clintgibler.com/programming/rogue-a-scala-type-safe-mongodb-dsl</link>
-      <pubDate>2012-06-22</pubDate>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;title&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/title&gt;
-    &lt;meta name="author" content="Clint Gibler"&gt;
+      <title>Archive</title>
+      <link>http://www.clintgibler.com/archive</link>
+      <description>
+  &lt;h2&gt;2012&lt;/h2&gt;
+    &lt;h3&gt;June&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;span&gt;2012-06-22&lt;/span&gt; &amp;raquo; &lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl"&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span&gt;2012-06-28&lt;/span&gt; &amp;raquo; &lt;a href="/posts/setting-up-mongodb-on-ubuntu-11-10"&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>Books</title>
+      <link>http://www.clintgibler.com/books</link>
+      <description>Here are some reviews and summaries of books I've enjoyed.
 
-    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
-    &lt;!--[if lt IE 9]&gt;
-      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
-    &lt;![endif]--&gt;
+&lt;/br&gt;
+&lt;/br&gt;
 
-    &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/twitter/stylesheets/bootstrap.min.css?0.7192820197238154" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/stylesheets/style.css?0.5161680674517176" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css?0.6396599200233104" type="text/css" rel="stylesheet" media="all"&gt;
+I'm still cleaning up a few, please check back later!
 
- 
 
-    &lt;!-- Le fav and touch icons --&gt;
-  &lt;!-- Update these with your own images
-    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
-    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
-    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
-    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
-  --&gt;
-  &lt;/head&gt;
+&lt;div class="pagination"&gt;
+  &lt;ul&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    <item>
+      <title>Categories</title>
+      <link>http://www.clintgibler.com/categories</link>
+      <description>
+&lt;ul class="tag_box inline"&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#programming-ref"&gt;programming &lt;span&gt;3&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#advice-ref"&gt;advice &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#conference-ref"&gt;conference &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#screen-ref"&gt;screen &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#talk-ref"&gt;talk &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#exercise-ref"&gt;exercise &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/categories#course/programming-ref"&gt;course/programming &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-  &lt;body&gt;
+  &lt;h3&gt;programming (3)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/git-basics"&gt;Git Basics&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl"&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/posts/setting-up-mongodb-on-ubuntu-11-10"&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;advice (1)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/how-to-ask-technical-questions"&gt;How to Ask Technical Questions&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;conference (1)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/mobisys-2013"&gt;Mobisys 2013&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;screen (1)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/motion-4-notes"&gt;Motion 4 Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;talk (1)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/silicon-valley-s-ultimate-exit"&gt;Silicon Valley's Ultimate Exit&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;exercise (1)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/six-pack-shortcuts"&gt;Six Pack Shortcuts&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;course/programming (1)&lt;/h3&gt;
+  &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/posts/udacity-cs259-software-debugging"&gt;Udacity CS259: Software Debugging&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>Home</title>
+      <link>http://www.clintgibler.com/</link>
+      <description>&lt;p&gt;
+  I am currently a fifth year Computer Science Ph.D. candidate at UC Davis, researching mobile security.
+  My work has primarily focused on examining how Android applications treat private user data and detecting code reuse.
+  I am fortunate to be advised by &lt;a href="http://www.cs.ucdavis.edu/~hchen/"&gt;Hao Chen&lt;/a&gt;.
+&lt;/p&gt;
 
-    &lt;div class="navbar"&gt;
-      &lt;div class="navbar-inner"&gt;
-        &lt;div class="container"&gt;
-          &lt;a class="brand" href="/"&gt;ClintGibler.com&lt;/a&gt;
-          &lt;ul class="nav"&gt;
-              
-                &lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
-              
-                &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
-              
-                &lt;li&gt;&lt;a href="/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
-              
-                &lt;li&gt;&lt;a href="/pages"&gt;Pages&lt;/a&gt;&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+&lt;p&gt;
+You can contact me at: &lt;i&gt;clintgibler AT gmail DOT com&lt;/i&gt;.
+&lt;/p&gt;
 
-    &lt;div class="container"&gt;
+&lt;p&gt;
+Here's some stuff I've written:
+&lt;ul&gt;
+  &lt;li&gt;
+  &lt;a href="/posts"&gt;Posts&lt;/a&gt; on assorted topics.  &lt;/li&gt;
+  &lt;li&gt;Academic paper &lt;a href="/papers"&gt;summaries&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Book &lt;a href="/books"&gt;reviews&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
 
-      &lt;div class="content"&gt;
-        &lt;div class="page-header"&gt;
-  &lt;h1&gt;Rogue: A Scala Type-Safe MongoDB DSL &lt;/h1&gt;
+&lt;h3 id="toc_0"&gt;Publications&lt;/h3&gt;
+
+&lt;p&gt;&lt;b&gt;Using and Asking: APIs Used in the Android Market and Asked About in StackOverflow&lt;/b&gt;
+&lt;/br&gt;
+Daryl Posnett, David Kavaler, Clint Gibler, Hao Chen, Prem Devanbu, and Vladimir Filkov
+&lt;/br&gt;
+&lt;i&gt;5th International Conference on Social Informatics (SocInfo)&lt;/i&gt;, Kyoto, Japan, November 25-27,
+  &lt;a href="http://www.socinfo2013.org/"&gt;2013&lt;/a&gt;.
+&lt;/br&gt;
+1 of 5 nominated for Best Paper.
+&lt;/br&gt;
+[&lt;a href="/assets/media/pubs/posnett2013using.pdf"&gt;paper&lt;/a&gt;]
+&lt;/br&gt;
+&lt;/br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;AnDarwin: Scalable Detection of Semantically Similar Android Applications&lt;/b&gt;
+&lt;/br&gt;
+Jonathan Crussell, Clint Gibler, and Hao Chen.
+&lt;/br&gt;
+&lt;i&gt;18th European Symposium on Research in Computer Security (ESORICS)&lt;/i&gt;, Egham, U.K., September 9-13,
+  &lt;a href="http://link.springer.com/chapter/10.1007/978-3-642-40203-6_11#page-1"&gt;2013&lt;/a&gt;. (18%)
+&lt;/br&gt;
+[&lt;a href="/assets/media/pubs/crussell2013andarwin.pdf"&gt;paper&lt;/a&gt;]
+[&lt;a href="/assets/media/pubs/andarwin-esorics-2013.pdf"&gt;ppt&lt;/a&gt;]
+&lt;/br&gt;
+&lt;/br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;AdRob: Examining the Landscape and Impact of Android Application Plagiarism&lt;/b&gt;
+&lt;/br&gt;
+Clint Gibler, Ryan Stevens, Jon Crussell, Hao Chen, Hui Zang, and Heesook Choi.
+&lt;/br&gt;
+&lt;i&gt;11th International Conference on Mobile Systems, Applications and Services (MobiSys)&lt;/i&gt;, Taipei, Taiwan, June 25-28,
+  &lt;a href="http://www.sigmobile.org/mobisys/2013/program.php"&gt;2013&lt;/a&gt;. (15.7%)
+&lt;/br&gt;
+[&lt;a href="/assets/media/pubs/gibler2013adrob.pdf"&gt;paper&lt;/a&gt;]
+[&lt;a href="/assets/media/pubs/adrob.pptx"&gt;ppt&lt;/a&gt;]
+[&lt;a href="http://www.youtube.com/watch?v=0tmonX9zFs0"&gt;video&lt;/a&gt;]
+&lt;/br&gt;
+&lt;/br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Attack of the Clones: Detecting Cloned Applications on Android Markets&lt;/b&gt;
+&lt;/br&gt;
+Jon Crussell, Clint Gibler, and Hao Chen.
+&lt;/br&gt;
+&lt;i&gt;17th European Symposium on Research in Computer Security (ESORICS)&lt;/i&gt;, Pisa, Italy, September 10-12,
+  &lt;a href="http://www.springerlink.com/content/978-3-642-33166-4/#section=1114172&amp;page=1"&gt;2012&lt;/a&gt;. (20%)
+&lt;/br&gt;
+[&lt;a href="/assets/media/pubs/esorics2012_attackoftheclones.pdf"&gt;paper&lt;/a&gt;]
+&lt;/br&gt;
+&lt;/br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;AndroidLeaks: Automatically Detecting Potential Privacy Leaks in Android Applications on a Large Scale&lt;/b&gt;
+&lt;/br&gt;
+Clint Gibler, Jon Crussell, Jeremy Erickson, and Hao Chen.
+&lt;/br&gt;
+&lt;i&gt;5th International Conference on Trust &amp;amp; Trustworthy Computing (TRUST)&lt;/i&gt;, Vienna, Austria, June 13-15,
+  &lt;a href="http://trust.sba-research.org/Agenda-Program.html"&gt;2012&lt;/a&gt;.
+&lt;/br&gt;
+[&lt;a href="/assets/media/pubs/trust2012_androidleaks.pdf"&gt;paper&lt;/a&gt;]
+&lt;/br&gt;
+&lt;/br&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Investigating User Privacy in Android Ad Libraries&lt;/b&gt;
+&lt;/br&gt;
+Ryan Stevens, Clint Gibler, Jon Crussell, Jeremy Erickson, and Hao Chen.
+&lt;/br&gt;
+&lt;i&gt;IEEE Mobile Security Technologies (MoST)&lt;/i&gt;, San Francisco, CA, May 24,
+  &lt;a href="http://mostconf.org/2012/"&gt;2012&lt;/a&gt;. (39%)
+&lt;/br&gt;
+[&lt;a href="/assets/media/pubs/most2012_adprivacy.pdf"&gt;paper&lt;/a&gt;]
+&lt;/br&gt;
+&lt;/br&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Pages</title>
+      <link>http://www.clintgibler.com/pages</link>
+      <description>
+&lt;ul&gt;
+  
+    &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/books"&gt;Books&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+  
+    &lt;li class="active"&gt;&lt;a href="/pages" class="active"&gt;Pages&lt;/a&gt;&lt;/li&gt;
+  
+  
+  
+    &lt;li&gt;&lt;a href="/papers"&gt;Papers&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/posts"&gt;Posts&lt;/a&gt;&lt;/li&gt;
+  
+  
+    &lt;li&gt;&lt;a href="/tags"&gt;Tags&lt;/a&gt;&lt;/li&gt;
+  
+&lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>Papers</title>
+      <link>http://www.clintgibler.com/papers</link>
+      <description>Here are some summaries of academic papers I've read.
+These are not meant to be formal reviews or critiques, they're simply
+  to help me remember the primary ideas of the papers.
+Hopefully they're useful to you.
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+If you feel I've omitted or misrepresented an important point,
+  please comment and I will update accordingly.
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+
+&lt;b&gt;Disclaimer&lt;/b&gt;:
+Nearly all the papers I review I do so under strict time constraints, which may lead to
+omission of important points or misinterpretation of findings. Any inaccuracies are mine alone and not
+the authors'. Occasionally I will directly use text from the paper to more rapidly finish taking notes.
+I make no claim of ownership or copyright of any text, ideas, or figures of any paper for which I am not an author.
+
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/papers/identity-location-disease-and-more-inferring-your-secrets-from-android-public-resources"&gt;Identity, Location, Disease and More: Inferring Your Secrets from Android Public Resources&lt;/a&gt; &lt;span class="date"&gt;2013-10-14&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;&lt;a href="http://www.cs.indiana.edu/%7Ezhou/files/fp045-zhou.pdf"&gt;Full paper&lt;/a&gt; - &lt;a href=""&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn't read)&lt;/small&gt;
+&lt;/h2&gt;
+
+&lt;p&gt;The authors develop a proof of concept Android app with no permissions that can "acquire sensitive information such as a smartphone user's identity, the disease condition he/she is interested in, her location and her driving route."&lt;/p&gt;
+
+&lt;p&gt;More specifically:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What revealing apps has the user installed? (e.g. a diabetes or gay social network app)&lt;/li&gt;
+&lt;li&gt;Where is the user?&lt;/li&gt;
+&lt;li&gt;What is the phone owner's Twitter account?&lt;/li&gt;
+&lt;li&gt;What diseases is he/she searching on the WebMD mobile app?&lt;/li&gt;
+&lt;li&gt;Stocks he/she searches in Yahoo! Finance.&lt;/li&gt;
+&lt;li&gt;What is the current travel route of the user?&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div class="row"&gt;
-  &lt;div class="span8"&gt;
-    &lt;p&gt;Recently our group has been debating about switching to &lt;a href="http://www.mongodb.org/"&gt;MongoDB&lt;/a&gt;.
-As a number of our analysis tools are written in Scala, naturally we&amp;#39;d like a Scala or Java ORM.&lt;/p&gt;
+  &lt;div class="more"&gt;
+    &lt;a href="/papers/identity-location-disease-and-more-inferring-your-secrets-from-android-public-resources" class="btn btn-small"&gt;read more..&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/papers/measuring-the-cost-of-cybercrime"&gt;Measuring the Cost of Cybercrime&lt;/a&gt; &lt;span class="date"&gt;2013-01-07&lt;/span&gt;&lt;/h3&gt;
 
-&lt;p&gt;After some search, we&amp;#39;ve decided to explore Rogue, a type-safe DSL for querying MongoDB.
-Here&amp;#39;s some motivation from the Foursquare engineers for developing Rogue, after using Lift for their ORM:&lt;/p&gt;
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;&lt;a href="http://weis2012.econinfosec.org/papers/Anderson_WEIS2012.pdf"&gt;Full paper&lt;/a&gt; - &lt;a href="http://scholar.google.com/scholar.bib?q=info:a716LVmi9LoJ:scholar.google.com/"&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn't read)&lt;/small&gt;
+&lt;/h2&gt;
+
+&lt;p&gt;The authors attempt to calculate the approximate cost to individuals and society of several types of cybercrime.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Direct losses&lt;/strong&gt;: losses, damage, or other suffering felt by the victim as a consequence of a cybercrime.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Indirect losses&lt;/strong&gt;: the losses and opportunity costs imposed on society by the fact that a certain cybercrime is carried
+out, no matter whether successful or not and independent of a specific instance of that cybercrime. Indirect costs
+generally cannot be attributed to individual victims.&lt;/p&gt;
+&lt;/div&gt;
+
+  &lt;div class="more"&gt;
+    &lt;a href="/papers/measuring-the-cost-of-cybercrime" class="btn btn-small"&gt;read more..&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/papers/mocfi-a-framework-to-mitigate-control-flow-attacks-on-smartphones"&gt;MoCFI: A Framework to Mitigate Control-Flow Attacks on Smartphones&lt;/a&gt; &lt;span class="date"&gt;2012-07-03&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;&lt;a href="http://www.trust.rub.de/media/emma/veroeffentlichungen/2012/04/11/Davi_MoCFI.pdf"&gt;Full paper&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn't read)&lt;/small&gt;
+&lt;/h2&gt;
+
+&lt;p&gt;MoCFI is the first general control-flow integrity (CFI) framework for smartphone platforms.
+It protects against runtime and control-flow attacks (e.g. code injection or ROP) by enforcing that jumps
+  go to an expected location.
+The implementation is on iOS though the overall technique should be applicable to Android (which also uses ARM).
+Note: requires jail-breaking to set an environment variable, install a shared library, and allow the library to rewrite app code
+  during load-time.&lt;/p&gt;
+
+&lt;/div&gt;
+
+  &lt;div class="more"&gt;
+    &lt;a href="/papers/mocfi-a-framework-to-mitigate-control-flow-attacks-on-smartphones" class="btn btn-small"&gt;read more..&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/papers/retargeting-android-applications-to-java-bytecode"&gt;Retargeting Android Applications to Java Bytecode&lt;/a&gt; &lt;span class="date"&gt;2013-01-15&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;&lt;a href="http://siis.cse.psu.edu/dare/papers/octeau-fse12.pdf"&gt;Full paper&lt;/a&gt; - &lt;a href="http://scholar.google.com/scholar.bib?q=info:nb2jU3F3eXgJ:scholar.google.com/"&gt;bibtex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;tl;dr &lt;small&gt;(too long; didn't read)&lt;/small&gt;
+&lt;/h2&gt;
+
+&lt;p&gt;This paper expands on &lt;a href="http://siis.cse.psu.edu/ded/publications.html"&gt;ded&lt;/a&gt; to more effectively convert Dalvik bytecode to Java class files (successfully retarged 99.99% of
+tested classes, 99.64% of apps' conversion completely verifiable).&lt;/p&gt;
+
+&lt;h4 id="toc_1"&gt;Contributions&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We introduce the Tyde intermediate representation for structured semantic mapping between the VMs. All 257 Dalvik instructions are translated using only 9 translation rules.&lt;/li&gt;
+&lt;li&gt;Because sound bytecode typing is necessary for verifiability, we use a strong constraint-based type inference algorithm.&lt;/li&gt;
+&lt;li&gt;We introduce code transformations to fix unverifiable input bytecode. In addition to making the code verifiable,
+these transformations accurately mirror VM runtime behavior.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+  &lt;div class="more"&gt;
+    &lt;a href="/papers/retargeting-android-applications-to-java-bytecode" class="btn btn-small"&gt;read more..&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="pagination"&gt;
+  &lt;ul&gt;
+      &lt;li class="active"&gt;&lt;a href="/papers/index/1"&gt;1&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    <item>
+      <title>Posts</title>
+      <link>http://www.clintgibler.com/posts</link>
+      <description>&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl"&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/a&gt; &lt;span class="date"&gt;2012-06-22&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;Recently our group has been debating about switching to &lt;a href="http://www.mongodb.org/"&gt;MongoDB&lt;/a&gt;.
+As a number of our analysis tools are written in Scala, naturally we'd like a Scala or Java ORM.&lt;/p&gt;
+
+&lt;p&gt;After some search, we've decided to explore Rogue, a type-safe DSL for querying MongoDB.
+Here's some motivation from the Foursquare engineers for developing Rogue, after using Lift for their ORM:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;blockquote&gt;
@@ -367,123 +418,195 @@ never informing you that the mayor field is not a String but a Long representing
 Well, we thought we could use the Scala type system to prevent this from ever happening, and that&#x2019;s what we set out to do.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/blockquote&gt;
+&lt;/div&gt;
 
-&lt;p&gt;The idea of compile-time query sanity checks is pretty neat. Unfortunately Rogue documentation is fairly sparse, though people are quite
-  helpful on the mailing list and there is some example code I&amp;#39;ve linked to below.&lt;/p&gt;
-
-&lt;h2 id="toc_0"&gt;Links&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Initial Foursquare blog posts about Rogue
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://engineering.foursquare.com/2011/01/21/rogue-a-type-safe-scala-dsl-for-querying-mongodb/"&gt;Rogue: A Type-Safe Scala DSL for querying MongoDB&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://engineering.foursquare.com/2011/01/31/going-rogue-part-2-phantom-types/"&gt;Going Rogue, Part 2: Phantom Types&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue"&gt;Rogue GitHub Page&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue/blob/master/src/test/scala/com/foursquare/rogue/TestModels.scala"&gt;Models examples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue/blob/master/src/test/scala/com/foursquare/rogue/QueryTest.scala"&gt;Query examples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/foursquare/rogue/blob/master/docs/Indexing.md"&gt;Indexing&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.assembla.com/spaces/liftweb/wiki/lift-mongodb-record"&gt;Lift-MongoDb-Record docs&lt;/a&gt; -&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="toc_1"&gt;Troubleshooting&lt;/h2&gt;
-
-&lt;p&gt;Rogue&amp;#39;s GitHub page recommends including the following in your build.sbt to use Rogue:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;val rogue = &amp;quot;com.foursquare&amp;quot; %% &amp;quot;rogue&amp;quot; % &amp;quot;1.1.8&amp;quot; intransitive()
-val liftMongoRecord = &amp;quot;net.liftweb&amp;quot; %% &amp;quot;lift-mongodb-record&amp;quot; % &amp;quot;2.4-M2&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;However, lift-mongodb-record version 2.4-M2 could not be resolved for me using scala 2.9.1 and sbt 0.11.2.
-Using the &amp;quot;-M4&amp;quot; version enabled sbt to resolve it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;val liftMongoRecord = &amp;quot;net.liftweb&amp;quot; %% &amp;quot;lift-mongodb-record&amp;quot; % &amp;quot;2.4-M4&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-    &lt;hr&gt;
-    &lt;div class="pagination"&gt;
-      &lt;ul&gt;
-        &lt;ul&gt;
-            &lt;li class="prev disabled"&gt;&lt;a&gt;&amp;larr; Previous&lt;/a&gt;&lt;/li&gt;
-
-            &lt;li&gt;&lt;a href="/archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
-
-            &lt;li class="next"&gt;&lt;a href="/programming/setting-up-mongodb-on-ubuntu-11-10" title="Setting Up MongoDB on Ubuntu 11.10"&gt;Next &amp;rarr;&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;hr&gt;
-    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
-&lt;script&gt;
-    var disqus_developer = 1;
-    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-&lt;/script&gt;
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-&lt;a href="http://disqus.com" class="dsq-brlink"&gt;blog comments powered by &lt;span class="logo-disqus"&gt;Disqus&lt;/span&gt;&lt;/a&gt;
-
+  &lt;div class="more"&gt;
+    &lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl" class="btn btn-small"&gt;read more..&lt;/a&gt;
   &lt;/div&gt;
-  
-  &lt;div class="span4"&gt;
-    &lt;h4&gt;Published&lt;/h4&gt;
-    &lt;div class="date"&gt;&lt;span&gt;2012-06-22&lt;/span&gt;&lt;/div&gt;
-    &lt;br&gt;
-    &lt;h4&gt;Categories&lt;/h4&gt;
-    &lt;ul class="tag_box"&gt;
-      &lt;li&gt;
-        &lt;a href="/categories#programming-ref"&gt;programming &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;    &lt;/ul&gt;
-    &lt;br&gt;
-    &lt;h4&gt;Tags&lt;/h4&gt;
-    &lt;ul class="tag_box"&gt;
-      &lt;li&gt;
-        &lt;a href="/tags#scala-ref"&gt;scala &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;      &lt;li&gt;
-        &lt;a href="/tags#programming-ref"&gt;programming &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;      &lt;li&gt;
-        &lt;a href="/tags#mongodb-ref"&gt;mongodb &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
-      &lt;/li&gt;    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="post"&gt;
+  &lt;h3 class="title"&gt;&lt;a href="/posts/setting-up-mongodb-on-ubuntu-11-10"&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/a&gt; &lt;span class="date"&gt;2012-06-28&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;div class="summary ellipsis"&gt;
+&lt;p&gt;MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Install&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/"&gt;Install the MongoDB package.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="toc_1"&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;I've installed my OS and /home on different partitions to make reinstalling the OS easier. So let's keep the config file and data/logs on the /home partition.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# in ~ or wherever you want to put mongodb's files
+mkdir mongodb
+cd mongodb
+mkdir db log                  # Create data/log folders
+# Create a copy of conf file
+cp /etc/init/mongodb.conf .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+  &lt;div class="more"&gt;
+    &lt;a href="/posts/setting-up-mongodb-on-ubuntu-11-10" class="btn btn-small"&gt;read more..&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
-      &lt;/div&gt;
+&lt;div class="pagination"&gt;
+  &lt;ul&gt;
+      &lt;li class="active"&gt;&lt;a href="/posts/index/1"&gt;1&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    <item>
+      <title>Tags</title>
+      <link>http://www.clintgibler.com/tags</link>
+      <description>
+&lt;ul class="tag_box inline"&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#programming-ref"&gt;programming &lt;span&gt;7&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#vcs-ref"&gt;vcs &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#git-ref"&gt;git &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#advice-ref"&gt;advice &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#erlang-ref"&gt;erlang &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#webapp-ref"&gt;webapp &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#screen-ref"&gt;screen &lt;span&gt;3&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#fcp-ref"&gt;fcp &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#coursera-ref"&gt;coursera &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#music-ref"&gt;music &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#guitar-ref"&gt;guitar &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#conference-ref"&gt;conference &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#notes-ref"&gt;notes &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#android-ref"&gt;android &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#research-ref"&gt;research &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#editing-ref"&gt;editing &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#talk-ref"&gt;talk &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#tech-ref"&gt;tech &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#exercise-ref"&gt;exercise &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#interview-ref"&gt;interview &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#entrepreneurship-ref"&gt;entrepreneurship &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#workshop-ref"&gt;workshop &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#course-ref"&gt;course &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#scala-ref"&gt;scala &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#mongodb-ref"&gt;mongodb &lt;span&gt;2&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="/tags#linux-ref"&gt;linux &lt;span&gt;1&lt;/span&gt;&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-      &lt;footer&gt;
-        &lt;p&gt;&amp;copy; Clint Gibler 2012 
-          with help from &lt;a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework"&gt;ruhoh&lt;/a&gt;
-          and &lt;a href="http://twitter.github.com/bootstrap/" target="_blank"&gt;Twitter Bootstrap&lt;/a&gt;
-        &lt;/p&gt;
-      &lt;/footer&gt;
-
-    &lt;/div&gt; &lt;!-- /container --&gt;
-
-    &lt;!-- Google Prettify --&gt;
-&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  var pres = document.getElementsByTagName("pre");
-  for (var i=0; i &lt; pres.length; ++i) {
-    pres[i].className = "prettyprint linenums";
-  }
-  prettyPrint();
-&lt;/script&gt;
-&lt;!-- end Google Prettify --&gt;
-    &lt;script&gt;
-  var _gaq=[['_setAccount','UA-37489513-1'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+  &lt;h3 id="programming-ref"&gt;programming&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/git-basics"&gt;Git Basics&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/how-to-ask-technical-questions"&gt;How to Ask Technical Questions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/chicago-boss"&gt;Chicago Boss&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/cryptographic-hashing"&gt;Cryptographic Hashing&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/technical-interviewing"&gt;Technical Interviewing&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/udacity-cs259-software-debugging"&gt;Udacity CS259: Software Debugging&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl"&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="vcs-ref"&gt;vcs&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/git-basics"&gt;Git Basics&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="git-ref"&gt;git&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/git-basics"&gt;Git Basics&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="advice-ref"&gt;advice&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/how-to-ask-technical-questions"&gt;How to Ask Technical Questions&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="erlang-ref"&gt;erlang&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/chicago-boss"&gt;Chicago Boss&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="webapp-ref"&gt;webapp&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/chicago-boss"&gt;Chicago Boss&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="screen-ref"&gt;screen&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/compressor-settings-for-uploading-hd-videos-to-youtube"&gt;Compressor Settings for Uploading HD Videos to Youtube&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/motion-4-notes"&gt;Motion 4 Notes&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/screen-notes"&gt;Screen Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="fcp-ref"&gt;fcp&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/compressor-settings-for-uploading-hd-videos-to-youtube"&gt;Compressor Settings for Uploading HD Videos to Youtube&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="coursera-ref"&gt;coursera&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/coursera-introduction-to-guitar"&gt;Coursera: Introduction to Guitar&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="music-ref"&gt;music&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/coursera-introduction-to-guitar"&gt;Coursera: Introduction to Guitar&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="guitar-ref"&gt;guitar&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/coursera-introduction-to-guitar"&gt;Coursera: Introduction to Guitar&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="conference-ref"&gt;conference&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/mobisys-2013"&gt;Mobisys 2013&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="notes-ref"&gt;notes&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/mobisys-2013"&gt;Mobisys 2013&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="android-ref"&gt;android&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/modifying-the-android-emulator"&gt;Modifying the Android Emulator&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="research-ref"&gt;research&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/modifying-the-android-emulator"&gt;Modifying the Android Emulator&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="editing-ref"&gt;editing&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/motion-4-notes"&gt;Motion 4 Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="talk-ref"&gt;talk&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/silicon-valley-s-ultimate-exit"&gt;Silicon Valley's Ultimate Exit&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="tech-ref"&gt;tech&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/silicon-valley-s-ultimate-exit"&gt;Silicon Valley's Ultimate Exit&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="exercise-ref"&gt;exercise&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/six-pack-shortcuts"&gt;Six Pack Shortcuts&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="interview-ref"&gt;interview&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/technical-interviewing"&gt;Technical Interviewing&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="entrepreneurship-ref"&gt;entrepreneurship&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/uc-entrepreneurship-academy-2012-day-1"&gt;UC Entrepreneurship Academy 2012: Day 1&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="workshop-ref"&gt;workshop&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/uc-entrepreneurship-academy-2012-day-1"&gt;UC Entrepreneurship Academy 2012: Day 1&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="course-ref"&gt;course&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/udacity-cs259-software-debugging"&gt;Udacity CS259: Software Debugging&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="scala-ref"&gt;scala&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl"&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="mongodb-ref"&gt;mongodb&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/rogue-a-scala-type-safe-mongodb-dsl"&gt;Rogue: A Scala Type-Safe MongoDB DSL&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/posts/setting-up-mongodb-on-ubuntu-11-10"&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/a&gt;&lt;/li&gt;
+  &lt;h3 id="linux-ref"&gt;linux&lt;/h3&gt;
+    &lt;li&gt;&lt;a href="/posts/setting-up-mongodb-on-ubuntu-11-10"&gt;Setting Up MongoDB on Ubuntu 11.10&lt;/a&gt;&lt;/li&gt;
+ 
 </description>
     </item>
   </channel>

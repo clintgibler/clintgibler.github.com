@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>About</title>
+    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Clint Gibler">
 
@@ -31,8 +31,8 @@
         <div class="container-narrow">
           <a class="brand" href="/">Clint Gibler</a>
           <ul class="nav">
-                <li class="active"><a href="/about" class="active">About</a></li>
               
+                <li><a href="/about">About</a></li>
               
               
                 <li><a href="/posts">Posts</a></li>
@@ -51,49 +51,67 @@
     <div class="container-narrow">
 
       <div class="content">
-        <div class="page-header">
-  <h1>About </h1>
+        <div class="row-fluid">
+  <div class="span12">
+      <div class="posts">
+        <h3 class="title"><a href="/posts/rogue-a-scala-type-safe-mongodb-dsl">Rogue: A Scala Type-Safe MongoDB DSL</a> <span class="date">2012-06-22</span></h3>
+
+        <div class="summary ellipsis">
+<p>Recently our group has been debating about switching to <a href="http://www.mongodb.org/">MongoDB</a>.
+As a number of our analysis tools are written in Scala, naturally we'd like a Scala or Java ORM.</p>
+
+<p>After some search, we've decided to explore Rogue, a type-safe DSL for querying MongoDB.
+Here's some motivation from the Foursquare engineers for developing Rogue, after using Lift for their ORM:</p>
+
+<blockquote>
+<blockquote>
+<p>Essentially, we found the querying support a bit too expressive — you can pass in a query object that doesn’t represent a valid
+query, or query against fields that aren’t part of the record. And in addition it isn’t very type-safe.
+You can ask for, say, all Venue records where mayor = “Bob”, and it happily executes that query for you, returning nothing,
+never informing you that the mayor field is not a String but a Long representing the ID of the user.
+Well, we thought we could use the Scala type system to prevent this from ever happening, and that’s what we set out to do.</p>
+</blockquote>
+</blockquote>
 </div>
 
-<div class="row-fluid">
-  <div class="span12">
-    <h2 id="toc_0">Education</h2>
+        <div class="more">
+          <a href="/posts/rogue-a-scala-type-safe-mongodb-dsl" class="btn btn-small">read more..</a>
+        </div>
+      </div>
+      <div class="posts">
+        <h3 class="title"><a href="/posts/setting-up-mongodb-on-ubuntu-11-10">Setting Up MongoDB on Ubuntu 11.10</a> <span class="date">2012-06-28</span></h3>
 
-<p>I graduated from <a href="http://case.edu/">Case Western Reserve University</a> in 2009 with a BS in Computer Science.
-There I was a member of the improv troupe <a href="http://improv.case.edu/">IMPROVment</a>, the ACM group, the
-International Collegiate Programming Competition team, and Model UN.</p>
+        <div class="summary ellipsis">
+<p>MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.</p>
 
-<p>I started attending <a href="http://ucdavis.edu/">UC Davis</a> in 2009 as a Computer Science PhD student focusing
-in computer security.
-As you can see on the home page, my research has primarily focused on the Android
-  smartphone OS, though my security interests are far more broad, including web
-  security, malware, and more.</p>
+<h2 id="toc_0">Install</h2>
 
-<h2 id="toc_1">Activities</h2>
+<ul>
+<li><a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/">Install the MongoDB package.</a></li>
+</ul>
+<h2 id="toc_1">Configuration</h2>
 
-<p>I tend to be drawn to a diverse range of topics, including psychology and screen writing / video production.
-Overall, I&#39;d say my biggest hobbies are martial arts and improv comedy.</p>
+<p>I've installed my OS and /home on different partitions to make reinstalling the OS easier. So let's keep the config file and data/logs on the /home partition.</p>
 
-<p>I did <a href="http://en.wikipedia.org/wiki/Sh%C5%8Drin-ry%C5%AB">Shorin-ryu</a> karate for about six years under the fantastic <a href="http://www.karatecincinnati.com/">Sensei Nishime</a>.
-Their whole family is incredibly talented and friendly.</p>
+<pre><code># in ~ or wherever you want to put mongodb's files
+mkdir mongodb
+cd mongodb
+mkdir db log                  # Create data/log folders
+# Create a copy of conf file
+cp /etc/init/mongodb.conf .
+</code></pre>
+</div>
 
-<p>More recently, I&#39;ve been doing a fair amount of improv comedy. I first started doing improv comedy my
-  freshmen year at Case with IMPROVment.
-We did primarily shortform improv including a number of musical games.
-Since I&#39;ve been at UC Davis, I&#39;ve been a part of <a href="http://www.birdstriketheatre.com">Birdstrike Theatre</a>.
-Birdstrike nearly exclusively does longform improv, which has been a fun change of pace.</p>
-
-<p>Shortform? Longform? From <a href="http://en.wikipedia.org/wiki/Improvisational_theatre#Improvisational_comedy">Wikipedia</a>:</p>
-
-<blockquote>
-<blockquote>
-<p>Shortform improv consists of short scenes usually constructed from a predetermined game, structure, or idea and driven by an audience suggestion.</p>
-
-<p>Longform improv performers create shows in which short scenes are often interrelated by story, characters, or themes.
-Longform shows may take the form of an existing type of theatre, for example a full-length play or Broadway-style musical such as Spontaneous Broadway.</p>
-</blockquote>
-</blockquote>
-
+        <div class="more">
+          <a href="/posts/setting-up-mongodb-on-ubuntu-11-10" class="btn btn-small">read more..</a>
+        </div>
+      </div>
+    
+    <div class="pagination">
+      <ul>
+          <li class="active"><a href="/posts/index/1">1</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 

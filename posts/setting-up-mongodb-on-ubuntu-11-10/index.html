@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Setting Up MongoDB on Ubuntu 11.10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Clint Gibler">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/style-e81fa375b231bedf6cb2dbc6653570cc.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/google_prettify/sons-of-obsidian-afb0925bfa2d994f17dab93e13fbf999.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/">Clint Gibler</a>
+          <ul class="nav">
+              
+                <li><a href="/about">About</a></li>
+              
+              
+                <li><a href="/posts">Posts</a></li>
+              
+              
+                <li><a href="/papers">Papers</a></li>
+              
+              
+                <li><a href="/books">Books</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Setting Up MongoDB on Ubuntu 11.10 </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2012-06-28</strong>
+    </div>
+    <div class="content">
+      <p>MongoDB is fairly easy to install on Ubuntu so this guide will hit the essentials and provide links for more details.</p>
+
+<h2 id="toc_0">Install</h2>
+
+<ul>
+<li><a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/">Install the MongoDB package.</a></li>
+</ul>
+
+<h2 id="toc_1">Configuration</h2>
+
+<p>I&#39;ve installed my OS and /home on different partitions to make reinstalling the OS easier. So let&#39;s keep the config file and data/logs on the /home partition.</p>
+
+<pre><code># in ~ or wherever you want to put mongodb&#39;s files
+mkdir mongodb
+cd mongodb
+mkdir db log                  # Create data/log folders
+# Create a copy of conf file
+cp /etc/init/mongodb.conf .
+</code></pre>
+
+<p>We want to store the data and log dirs in a custom location so they aren&#39;t wiped in OS reinstall, so change mongodb.conf to the following:</p>
+
+<pre><code>dbpath=/home/&lt;user&gt;/mongodb/db
+...
+logpath=/home/&lt;user&gt;/mongodb/log/mongodb.log
+...
+auth = true
+</code></pre>
+
+<h2 id="toc_2">Security</h2>
+
+<p>I&#39;m going to skip a lot of important details, please read:
+<a href="http://www.mongodb.org/display/DOCS/Security+and+Authentication">MongoDB&#39;s Security and Authentication</a>.
+The page lists default ports for services, basic firewall rules and other useful info.</p>
+
+<h4 id="toc_3">Things to note</h4>
+
+<ul>
+<li>By default MongoDB assumes you have carefully set up your firewall/networking environment to restrict who can access the server(s).
+
+<ul>
+<li>&quot;By default, security mode is off.&quot;</li>
+<li>&quot;By default, a mongod server will listen on all available IP addresses on a machine. You can restrict this to a single IP address with the
+&#39;bind_ip&#39; configuration option for mongod.&quot;</li>
+</ul></li>
+<li>Are passwords sent over the wire encrypted?
+
+<ul>
+<li>Yes. (Actually a nonce-based digest is passed.)</li>
+</ul></li>
+<li>Are database operations, after authenticating, passed over the wire encrypted?
+
+<ul>
+<li>Not by default. See the <a href="http://docs.mongodb.org/manual/administration/ssl/">SSL doc page</a> for more information.</li>
+</ul></li>
+</ul>
+
+<p>We enabled secure mode by setting <em>auth = true</em> in mongodb.conf above.</p>
+
+<h3 id="toc_4">Create Users</h3>
+
+<p>Create admin user:</p>
+
+<pre><code>&gt; // use admin db
+$ mongo localhost/admin
+&gt; db.addUser(&quot;theadmin&quot;, &quot;anadminpassword&quot;)
+&gt; // authenticate as admin
+&gt; db.auth(&quot;theadmin&quot;, &quot;anadminpassword&quot;)
+</code></pre>
+
+<p>Create read/write user:</p>
+
+<pre><code>&gt; use somedb
+&gt; db.addUser(&quot;joe&quot;, &quot;passwordForJoe&quot;)
+</code></pre>
+
+<p>Create read user:</p>
+
+<pre><code>&gt; use somedb
+&gt; db.addUser(&quot;guest&quot;, &quot;passwordForGuest&quot;, true)
+</code></pre>
+
+<h3 id="toc_5">Secure Mode with Sharded Clusters and Replica Sets</h3>
+
+<p>From a client&#39;s perspective, communicating with a sharded cluster or replica set is identical to single-server authentication.
+However, servers use a <em>key file</em> to authenticate internal communication.</p>
+
+<blockquote>
+<p>A key file must contain at least six Base64 characters and be no larger than 1KB (whitespace included). Whitespace characters are stripped.</p>
+</blockquote>
+
+<p>Since the key file is stored in a file and not typed, I see no reason not to make it close to 1KB. A simple generation using <em>mkpasswd</em></p>
+
+<pre><code>for i in `seq 0 N`; do mkpasswd -S &lt;salt&gt; -s $i &gt;&gt; key; done
+</code></pre>
+
+<p>where salt is 2 characters and N is the number of passwords to generate. I found N = ~70 to create key files close to 1KB.
+To include even more characters you can remove newlines as MongoDB will strip them anyway.</p>
+
+<p>Make sure to set permissions restrictively on <em>key</em>, as MongoDB will exit immediately if the permissions are too open (on *nix up to 700 is allowed).
+Also note that MongoDb will complain if there&#39;s any &quot;.&quot; in the key file, so replace them with some other characters.</p>
+
+<h2 id="toc_6">Running</h2>
+
+<p>Since we&#39;re placing the db data and <em>mongodb.conf</em> in custom locations we need to slightly customize how we run mongodb.</p>
+
+<h3 id="toc_7">Shell script</h3>
+
+<p>You can use a simple shell script, like:</p>
+
+<pre><code>#!/bin/bash
+mongod --config /path/to/mongodb.conf --keyFile /path/to/key
+</code></pre>
+
+<h3 id="toc_8">As a service</h3>
+
+<p>This is the <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian-or-ubuntu-linux/">recommended method</a>.</p>
+
+<pre><code>sudo service mongodb start
+</code></pre>
+
+<p>or</p>
+
+<pre><code>sudo /etc/init.d/mongodb start
+</code></pre>
+
+<p>Making these methods work using our customized install settings requires a few changes.</p>
+
+<p>To modify the default service behavior edit <em>/etc/init/mongodb.conf</em> (spacing changed to improve readability):</p>
+
+<pre><code># Original:
+if [ &quot;x$ENABLE_MONGODB&quot; = &quot;xyes&quot; ]; then exec start-stop-daemon --start --quiet
+       --chuid mongodb
+       --exec  /usr/bin/mongod --
+       --config /etc/mongodb.conf; fi
+# I modified to:
+if # same as before up to
+       --chuid &lt;custom_user&gt;
+       --exec  /usr/bin/mongod --
+       --config /home/&lt;user&gt;/mongodb/mongodb.conf
+       --keyFile /home/&lt;user&gt;/mongodb/key; fi
+</code></pre>
+
+<p>Running as the default mongodb user is probably a good idea unless you have a specific reason not to.
+Now using <em>service</em> to start/stop mongodb will use our custom settings.</p>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      <li>
+        <a href="/categories#programming-ref">programming <span>3</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      <li>
+        <a href="/tags#mongodb-ref">mongodb <span>2</span></a>
+      </li>
+      <li>
+        <a href="/tags#linux-ref">linux <span>1</span></a>
+      </li>
+    </ul>
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev disabled"><a>&larr; Previous</a></li>
+
+          <li><a href="/archive">Archive</a></li>
+
+          <li class="next"><a href="/posts/rogue-a-scala-type-safe-mongodb-dsl" title="Rogue: A Scala Type-Safe MongoDB DSL">Next &rarr;</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'clintgibler'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Clint Gibler 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37489513-1']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+
+  </body>
+</html>

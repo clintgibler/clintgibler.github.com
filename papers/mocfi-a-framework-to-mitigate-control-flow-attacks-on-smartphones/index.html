@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MoCFI: A Framework to Mitigate Control-Flow Attacks on Smartphones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Clint Gibler">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/style-e81fa375b231bedf6cb2dbc6653570cc.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/google_prettify/sons-of-obsidian-afb0925bfa2d994f17dab93e13fbf999.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/">Clint Gibler</a>
+          <ul class="nav">
+              
+                <li><a href="/about">About</a></li>
+              
+              
+                <li><a href="/posts">Posts</a></li>
+              
+              
+                <li><a href="/papers">Papers</a></li>
+              
+              
+                <li><a href="/books">Books</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>MoCFI: A Framework to Mitigate Control-Flow Attacks on Smartphones </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2012-07-03</strong>
+    </div>
+    <div class="content">
+      <p><a href="http://www.trust.rub.de/media/emma/veroeffentlichungen/2012/04/11/Davi_MoCFI.pdf">Full paper</a></p>
+
+<h2 id="toc_0">tl;dr <small>(too long; didn&#39;t read)</small></h2>
+
+<p>MoCFI is the first general control-flow integrity (CFI) framework for smartphone platforms.
+It protects against runtime and control-flow attacks (e.g. code injection or ROP) by enforcing that jumps
+  go to an expected location.
+The implementation is on iOS though the overall technique should be applicable to Android (which also uses ARM).
+Note: requires jail-breaking to set an environment variable, install a shared library, and allow the library to rewrite app code
+  during load-time.</p>
+
+<p>MoCFI consists of the following steps:</p>
+
+<ol>
+<li>IDA Pro is used to perform static analysis on an iOS app to determine branch instructions that may be exploited for a control-flow attack.</li>
+<li>Possible targets for each indirect branch are calculated and a Patchfile is generated that replaces these branches with trampolines to
+the <em>MoCFI</em> module.</li>
+<li>At load-time, a binary rewriting module applies the Patchfile to the app&#39;s image in memory.
+This method leaves the original app code unchanged, leaving the code signature intact.</li>
+<li>At run-time, each relevant branch now passes control to <em>MoCFI</em> which validates that the branch target resolves to one of
+the valid targets calculated by the static analysis step.</li>
+</ol>
+
+<h2 id="toc_1">Abstract</h2>
+
+<p>Runtime and control-ﬂow attacks (such as code injection or return-oriented programming) constitute one of the
+most severe threats to software programs. These attacks
+are prevalent and have been recently applied to smartphone
+applications as well, of which hundreds of thousands are
+downloaded by users every day. While a framework for
+control-ﬂow integrity (CFI) enforcement, an approach to
+prohibit this kind of attacks, exists for the Intel x86 platform, there is no such a solution for smartphones.</p>
+
+<p>In this paper, we present a novel framework, MoCFI
+(Mobile CFI), that provides a general countermeasure
+against control-ﬂow attacks on smartphone platforms by enforcing CFI. We show that CFI on typical smartphone platforms powered by an
+ARM processor is technically involved due to architectural differences between ARM and Intel x86,
+as well as the speciﬁcs of smartphone OSes. Our framework performs CFI on-the-ﬂy during runtime without requiring
+the application’s source code. For our reference implementation we chose Apple’s iOS, because it has been an attractive target for control-ﬂow
+attacks. Nevertheless, our framework is also applicable to other ARM-based devices such
+as Google’s Android. Our performance evaluation demonstrates that MoCFI is efﬁcient and does not induce notable
+overhead when applied to popular iOS applications.</p>
+
+<h2 id="toc_2">Other Details</h2>
+
+<ul>
+<li><em>Control-flow integrity</em> (CFI) - when the control-flow of a program follows only the legitimate paths determined in advance.</li>
+<li>Compiler approaches won&#39;t work because source code is not available and the solutiion would be specific to a given compiler,
+  which would not be feasible as both LLVM and GCC are widely used for iOS.</li>
+<li>CFI on ARM is more involved than on desktop PCs due to several architectural differences (details Section 3.3)
+
+<ul>
+<li>The program counter is a general-purpose register</li>
+<li>The processor may switch the instruction set at runtime</li>
+<li>There are no dedicated return instructions</li>
+<li>Control-flow instructions may load several registers as a side-effect</li>
+</ul></li>
+<li>Section 2.1 and 5 have some useful info about the ARM architecture.</li>
+<li>Section 2.2 - Selected iOS Security Features
+
+<ul>
+<li>W xor X (Writable xor eXecutable) memory pages since iOS v2.0</li>
+<li>Cannot prevent ROP attacks that leverage existing and signed code pieces.</li>
+<li>Stack-Smashing Protector (SSP) - canaries between local variables and control-flow info to detect stack smashing attacks.</li>
+<li>ASLR since iOS v4.3</li>
+</ul></li>
+<li>The current prototype protects an application&#39;s main code but not dynamic libraries that are loaded into the process.</li>
+<li>Current prototype also does not detect attacks exploiting exception handlers (when an adversary rewrites pointers to an
+exception handler and then deliberately causes an exception).</li>
+</ul>
+
+<h2 id="toc_3">Diagrams</h2>
+
+<p>The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+<br /></p>
+
+<h3>Diagram of Control Flow Attacks</h3>
+
+<p><img src="/assets/media/papers/reviews/mocfi/control_flow_attack_overview.png"></p>
+
+<p><br />
+<br />
+<br />
+<br /></p>
+
+<h3 id="toc_4"><em>MoCFI</em> Architecture Overview</h3>
+
+<p><img src="/assets/media/papers/reviews/mocfi/mocfi_architecture.png"></p>
+
+<p><br />
+<br />
+<br />
+<br /></p>
+
+<h3 id="toc_5">The Trampolines Inserted into Apps To Redirect Control Flow</h3>
+
+<p><img src="/assets/media/papers/reviews/mocfi/trampoline_approach.png"></p>
+
+<p><br />
+<br />
+<br />
+<br /></p>
+
+<h3 id="toc_6">Architecture of the Run-Time Module (Branch Enforcer)</h3>
+
+<p><img src="/assets/media/papers/reviews/mocfi/runtime_module_overview.png"></p>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      <li>
+        <a href="/categories#security-ref">security <span>1</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      <li>
+        <a href="/tags#security-ref">security <span>3</span></a>
+      </li>
+      <li>
+        <a href="/tags#iOS-ref">iOS <span>1</span></a>
+      </li>
+      <li>
+        <a href="/tags#control_flow_integrity-ref">control_flow_integrity <span>1</span></a>
+      </li>
+    </ul>
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev"><a href="/papers/retargeting-android-applications-to-java-bytecode" title="Retargeting Android Applications to Java Bytecode">&larr; Previous</a></li>
+
+          <li><a href="/archive">Archive</a></li>
+
+          <li class="next"><a href="/papers/measuring-the-cost-of-cybercrime" title="Measuring the Cost of Cybercrime">Next &rarr;</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'clintgibler'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Clint Gibler 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37489513-1']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+
+  </body>
+</html>

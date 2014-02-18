@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Retargeting Android Applications to Java Bytecode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Clint Gibler">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+<link href='/assets/stylesheets/bootstrap.min-88238289010db19359d2181e634e95cd.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/style-e81fa375b231bedf6cb2dbc6653570cc.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/google_prettify/sons-of-obsidian-afb0925bfa2d994f17dab93e13fbf999.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="/">Clint Gibler</a>
+          <ul class="nav">
+              
+                <li><a href="/about">About</a></li>
+              
+              
+                <li><a href="/posts">Posts</a></li>
+              
+              
+                <li><a href="/papers">Papers</a></li>
+              
+              
+                <li><a href="/books">Books</a></li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Retargeting Android Applications to Java Bytecode </h1>
+</div>
+
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>2013-01-15</strong>
+    </div>
+    <div class="content">
+      <p><a href="http://siis.cse.psu.edu/dare/papers/octeau-fse12.pdf">Full paper</a> - <a href="http://scholar.google.com/scholar.bib?q=info:nb2jU3F3eXgJ:scholar.google.com/">bibtex</a></p>
+
+<h2 id="toc_0">tl;dr <small>(too long; didn&#39;t read)</small></h2>
+
+<p>This paper expands on <a href="http://siis.cse.psu.edu/ded/publications.html">ded</a> to more effectively convert Dalvik bytecode to Java class files (successfully retarged 99.99% of
+tested classes, 99.64% of apps&#39; conversion completely verifiable).</p>
+
+<h4 id="toc_1">Contributions</h4>
+
+<ul>
+<li>We introduce the Tyde intermediate representation for structured semantic mapping between the VMs. All 257 Dalvik instructions are translated using only 9 translation rules.</li>
+<li>Because sound bytecode typing is necessary for verifiability, we use a strong constraint-based type inference algorithm.</li>
+<li>We introduce code transformations to fix unverifiable input bytecode. In addition to making the code verifiable,
+these transformations accurately mirror VM runtime behavior.</li>
+</ul>
+
+<p>Retargeting took 20 minutes for 1,100 apps. (top 50 most popular apps in the 22 app categories as of Sept 1, 2010)
+The complete processing of all applications including Dalvik pre-verification (modiﬁed Dalvik verifier), retargeting (<em>Dare</em>)
+and assembly (Jasmin) took less than 70 compute-minutes.</p>
+
+<p>Over 20% of applications in the sample have unverifiable Dalvik bytecode in at least one class.</p>
+
+<p>We are not concerned with optimality but only with semantic equivalence.</p>
+
+<p>The insight behind Tyde is that, by typing all instruction arguments, load/store operations can be translated independently of opcodes.</p>
+
+<h4 id="toc_2">Translation Process</h4>
+
+<p>The application bytecode is initially translated into the Tyde intermediate representation (IR) in three steps:</p>
+
+<ul>
+<li>the <em>.dex</em> file is parsed and code structures, methods and the global constant pool are interpreted and annotated,</li>
+<li>a control ﬂow graph is generated and</li>
+<li>register types used in ambiguous instructions are inferred.</li>
+</ul>
+
+<p>The Java bytecode is thereafter generated from this IR in three phases:</p>
+
+<ul>
+<li>a pre-processing step generates labels and maps registers to local variables,</li>
+<li>the IR is translated to Jasmin code, and</li>
+<li>the Jasmin tool generates the final <em>.class</em> files.</li>
+</ul>
+
+<h2 id="toc_3">Abstract</h2>
+
+<p>The Android OS has emerged as the leading platform for SmartPhone applications. However, because Android applications are compiled from Java source into platform-specific Dalvik bytecode, existing program analysis tools cannot be used to evaluate their behavior. This paper develops and evaluates algorithms for retargeting Android applications received from markets to Java class files. The resulting Dare tool uses a new intermediate representation to enable fast and accurate retargeting. Dare further applies strong constraint solving to infer typing information and translates the 257 DVM opcodes using only 9 translation rules. It also handles cases where the input Dalvik bytecode is unverifiable. We evaluate Dare on 1,100 of the top applications found in the free section of the Android market and successfully retarget 99.99% of the 262,110 associated classes. Further, whereas existing tools can only fully retarget about half of these applications, Dare can recover over 99% of them. In this way, we open the door to users, developers and markets to use the vast array of program analysis tools to ensure the correct operation of Android applications.</p>
+
+<h2 id="toc_4">Review</h2>
+
+<h3 id="toc_5">Pros</h3>
+
+<p>This paper has great detail on the comparison between Java and Dalvik bytecode.</p>
+
+<p>The translation rules are elegant and insightful- creating 9 rules to translate 257 opcodes is impressive.</p>
+
+<h3 id="toc_6">Cons</h3>
+
+<p>They claim to be a more systematic approach to <em>ded</em>, but rather than comparing them they say a direct comparison doesn&#39;t make sense.</p>
+
+<p>I wish they had given more details about the hardware used for the evaluation performance stats.</p>
+
+<h2 id="toc_7">Notes</h2>
+
+<p>Dalvik instructions are vastly different from Java instructions. DVM bytecode has 257 different instructions and 3
+pseudo-instructions. Dalvik instructions are two to ten bytes long,
+and pseudo-instructions have a variable length. The DVM has substantially more instruction formats (over 20) than the JVM.</p>
+
+<p>The DVM is register-based, whereas the JVM is stack-based.</p>
+
+<p>During the path-sensitive type verification process, the Java verifier considers that any instruction in a try block may throw an
+exception. In reality, not all instructions in each try block are able to throw exceptions. Therefore, the Java verifier considers some
+unfeasible execution paths. On the other hand, the Dalvik verifier does not consider these unfeasible paths.</p>
+
+<p>In Tyde, we introduce the notion of typed registers. It adds two elements to Dalvik registers: a type (<em>tau</em>)
+and information about whether the register is a source or destination register (represented by terminals <em>delta(s)</em> and <em>delta(d)</em>).</p>
+
+<p>While parsing instructions, type information for registers is determined.
+For example, the types of several unary and binary operators can be known from their opcode, e.g., an <em>add-long</em> instruction takes
+two long integers as sources and a long integer as destination. Also, during this parsing step, for every
+instruction which uses a constant pool reference, a new Java constant is generated on the fly. The only exception is when the
+instruction is an ambiguous numeric constant assignment. In that case, type information is needed before the constant can be created.</p>
+
+<p>Type inference for Dalvik bytecode uses the following approach: First we generate constraints on types based on definitions and uses.
+These constraints are then solved to infer unknown types. Note that our goal is not to determine types for all variables.</p>
+
+<p>A Dalvik code in Tyde IR is translated into Java bytecode in three steps.
+In the first step, registers are mapped to Java local variables and labels are generated to support control-flow instructions.
+In the second step, instructions in Tyde IR are converted to Jasmin instructions (Jasmin is a Java bytecode assembler).
+The third step is to use Jasmin to generate Java <em>.class</em> bytecode.</p>
+
+<h4 id="toc_8">Observed Errors</h4>
+
+<p><strong>Improper references</strong></p>
+
+<ul>
+<li>References to classes which are not available within the application or in the core Android classes. A special case is when
+the superclass of a class is missing; then the class is trivially unverifiable and is not even linked by the DVM.
+
+<ul>
+<li>Apps commonly use private Android APIs.</li>
+</ul></li>
+<li>References to methods or fields which are non-existent or not accessible (e.g., private member).
+
+<ul>
+<li>Developers often include entire libraries to be able to use some classes from these libraries.
+Parts of the included libraries sometimes make calls to other libraries, which are not themselves included with the
+Android application.</li>
+</ul></li>
+</ul>
+
+<p><strong>Typing and other issues</strong></p>
+
+<p>Invalid typing caused by malformed class or member identifier, illegal access flag, etc.</p>
+
+<h2 id="toc_9">Diagrams</h2>
+
+<p>The following are relevant diagrams from the paper. Several diagrams and performance graphs have been omitted, see the paper
+for details.
+<br /></p>
+
+<h3 id="toc_10">Overall Dare System Architecture</h3>
+
+<p><img class="paper_diagram" src="/assets/media/papers/reviews/dare//fig2.png"></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="toc_11">Example of Code Representation at each Step</h3>
+
+<p><img class="paper_diagram" src="/assets/media/papers/reviews/dare//fig3.png"></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="toc_12">Tyde IR Construction</h3>
+
+<p><img class="paper_diagram" src="/assets/media/papers/reviews/dare//fig7.png"></p>
+
+<p><br />
+<br /></p>
+
+    </div>
+    <ul class="tag_box inline">
+      <li><i class="icon-folder-open"></i></li>
+      <li>
+        <a href="/categories#android-ref">android <span>2</span></a>
+      </li>
+    </ul>
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      <li>
+        <a href="/tags#android-ref">android <span>12</span></a>
+      </li>
+      <li>
+        <a href="/tags#programming_languages-ref">programming_languages <span>1</span></a>
+      </li>
+    </ul>
+    <hr>
+    <div class="pagination">
+      <ul>
+          <li class="prev disabled"><a>&larr; Previous</a></li>
+
+          <li><a href="/archive">Archive</a></li>
+
+          <li class="next"><a href="/papers/mocfi-a-framework-to-mitigate-control-flow-attacks-on-smartphones" title="MoCFI: A Framework to Mitigate Control-Flow Attacks on Smartphones">Next &rarr;</a></li>
+      </ul>
+    </div>
+    <hr>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'clintgibler'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; Clint Gibler 2013
+          with help from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37489513-1']);
+  _gaq.push(['_trackPageview']);
+  
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+
+  </body>
+</html>
